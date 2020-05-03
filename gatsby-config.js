@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Pacific Online Stores`,
+    description: `Pacific is the web app that let you connect with store owners for all kind of items that you may want to buy.`,
+    author: `@bant89`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
