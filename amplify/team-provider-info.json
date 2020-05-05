@@ -10,6 +10,13 @@
             "StackName": "amplify-pacific-dev-172052",
             "StackId": "arn:aws:cloudformation:us-east-1:150462384668:stack/amplify-pacific-dev-172052/f94062c0-8d83-11ea-bf15-0e5e10b6c293",
             "AmplifyAppId": "d3en83299fe0yx"
+        },
+        "categories": {
+            "auth": {
+                "pacific2a203f89": {
+                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"1059989084401732\",\"client_secret\":\"55d4e9630d424a291c959f81b9f75753\"},{\"ProviderName\":\"Google\",\"client_id\":\"435450634394-s6ie0m2c81u64gq7kfolprgi039sjuna.apps.googleusercontent.com\",\"client_secret\":\"FNn-lrD2ry5y80k-2_R1ciCB\"}]"
+                }
+            }
         }
     }
 }
