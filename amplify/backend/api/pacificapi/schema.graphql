@@ -1,11 +1,26 @@
-type Store @model {
+type Store
+  @model
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: groups, groups: ["Admin"] }
+    ]
+  ) {
   id: ID!
   name: String!
   description: String!
   products: [Product] @connection(keyName: "byStore", fields: ["id"])
 }
 
-type Product @model @key(name: "byStore", fields: ["storeID"]) {
+type Product
+  @model
+  @key(name: "byStore", fields: ["storeID"])
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: groups, groups: ["Admin"] }
+    ]
+  ) {
   id: ID!
   title: String!
   storeID: ID!
@@ -16,7 +31,15 @@ type Product @model @key(name: "byStore", fields: ["storeID"]) {
   reviews: [Review] @connection(keyName: "byProduct", fields: ["id"])
 }
 
-type Review @model @key(name: "byProduct", fields: ["productID", "content"]) {
+type Review
+  @model
+  @key(name: "byProduct", fields: ["productID", "content"])
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: groups, groups: ["Admin"] }
+    ]
+  ) {
   id: ID!
   productID: ID!
   product: Product @connection(fields: ["productID"])

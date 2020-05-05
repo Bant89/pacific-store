@@ -1,6 +1,6 @@
 {
     "identityPoolName": "pacific2a203f89_identitypool_2a203f89",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "pacifi2a203f89",
     "userPoolName": "pacific2a203f89_userpool_2a203f89",
     "autoVerifiedAttributes": [
