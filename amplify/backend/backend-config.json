@@ -1,10 +1,22 @@
 {
-	"auth": {
-		"pacific15fbeffb": {
-			"service": "Cognito",
+	"auth": {},
+	"api": {
+		"pacificapi": {
+			"service": "AppSync",
 			"providerPlugin": "awscloudformation",
-			"dependsOn": [],
-			"customAuth": false
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [],
+					"defaultAuthentication": {
+						"authenticationType": "API_KEY",
+						"apiKeyConfig": {
+							"description": "Pacific api key",
+							"apiKeyExpirationDays": "2"
+						}
+					}
+				}
+			}
 		}
-	}
+	},
+	"function": {}
 }

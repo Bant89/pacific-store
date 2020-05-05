@@ -1,3 +1,5 @@
+import aws from "./src/aws-exports"
+
 module.exports = {
   siteMetadata: {
     title: `Pacific Online Stores`,
@@ -25,6 +27,17 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: `gatsby-source-graphql`,
+      options: {
+        typeName: `PACIFIC`,
+        fieldName: `pacific`,
+        url: aws.aws_appsync_graphqlEndpoint,
+        headers: {
+          "x-api-key": aws.aws_appsync_apiKey,
+        },
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

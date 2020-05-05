@@ -1,0 +1,25 @@
+type Store @model {
+  id: ID!
+  name: String!
+  description: String!
+  products: [Product] @connection(keyName: "byStore", fields: ["id"])
+}
+
+type Product @model @key(name: "byStore", fields: ["storeID"]) {
+  id: ID!
+  title: String!
+  storeID: ID!
+  description: String!
+  price: Float!
+  quantity: Int!
+  store: Store @connection(fields: ["storeID"])
+  reviews: [Review] @connection(keyName: "byProduct", fields: ["id"])
+}
+
+type Review @model @key(name: "byProduct", fields: ["productID", "content"]) {
+  id: ID!
+  productID: ID!
+  product: Product @connection(fields: ["productID"])
+  content: String!
+  rating: Float!
+}
