@@ -50,7 +50,7 @@ export const HeaderList = styled.ul`
 `
 
 export const HiddenContainer = styled.div`
-  display: ${props => (props.display ? "flex" : "none")};
+  display: ${props => props.display};
   width: 100%;
   align-items: center;
   justify-content: center;

@@ -38,7 +38,7 @@ export const Header = ({ siteTitle }) => {
               <IoMdMenu size="36px" />
             </IconButton>
           </HeaderItem>
-          <HiddenContainer display={display}>
+          <HiddenContainer display={display ? "flex" : "none"}>
             <HeaderItem>Stores</HeaderItem>
             <HeaderItem>Products</HeaderItem>
             <HeaderItem>Search</HeaderItem>
