@@ -2,8 +2,9 @@ import React, { useState } from "react"
 
 export const Field = ({ name, validation, label, properties }) => {
   const [inputValue, setInputValue] = useState("")
+  const [fileValue, setFileValue] = useState(undefined)
   const [validate, setValidation] = useState("")
-  let inputReturned = null
+  let inputReturned = undefined
 
   const changeValue = event => {
     const { value } = event.target
@@ -16,14 +17,25 @@ export const Field = ({ name, validation, label, properties }) => {
     }
   }
 
-  inputReturned = (
-    <input
-      name={name}
-      {...properties}
-      onChange={changeValue}
-      value={inputValue}
-    />
-  )
+  const changeFileValue = event => {
+    if (properties.multiple) {
+      setFileValue(event.target.files)
+    } else {
+      setFileValue(event.target.files[0])
+    }
+  }
+
+  inputReturned =
+    properties.type !== "file" ? (
+      <input
+        name={name}
+        {...properties}
+        onChange={changeValue}
+        value={inputValue}
+      />
+    ) : (
+      <input name={name} {...properties} onChange={changeFileValue} />
+    )
 
   return (
     <>

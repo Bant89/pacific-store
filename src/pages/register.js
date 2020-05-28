@@ -13,7 +13,6 @@ const Register = () => {
       label: "Name:",
       properties: {
         type: "text",
-        required: "",
         alt: "Name input",
         placeholder: "John Fisherman",
       },
@@ -24,19 +23,36 @@ const Register = () => {
       label: "Email:",
       properties: {
         type: "email",
-        required: "",
         alt: "Email input",
         placeholder: "user@email.com",
       },
     },
     {
       name: "password",
-      validation: Validation.noValidation,
+      validation: Validation.password,
       label: "Password:",
       properties: {
         type: "password",
-        required: "",
         alt: "Password input",
+      },
+    },
+    {
+      name: "photo",
+      validation: Validation.noValidation,
+      label: "Photo:",
+      properties: {
+        type: "file",
+        alt: "File input",
+      },
+    },
+    {
+      name: "images",
+      validation: Validation.noValidation,
+      label: "images:",
+      properties: {
+        type: "file",
+        alt: "File input",
+        multiple: "true",
       },
     },
   ]

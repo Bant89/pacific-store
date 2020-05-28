@@ -23,6 +23,8 @@ export const Form = ({ fields }) => {
       console.log(
         `Values length ${values.length} and Field length ${fields.length}`
       )
+      console.log(`Values: ${JSON.stringify(values)}`)
+      console.log(`Fields: ${JSON.stringify(fields)}`)
       setFormValidation("Missing fields")
     }
   }
