@@ -45,16 +45,6 @@ const Register = () => {
         alt: "File input",
       },
     },
-    {
-      name: "images",
-      validation: Validation.noValidation,
-      label: "images:",
-      properties: {
-        type: "file",
-        alt: "File input",
-        multiple: "true",
-      },
-    },
   ]
 
   return (

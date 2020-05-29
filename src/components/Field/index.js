@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { NormalInput, Label, ErrorMessage } from "./styles"
 
 export const Field = ({ name, validation, label, properties }) => {
   const [inputValue, setInputValue] = useState("")
@@ -27,7 +28,7 @@ export const Field = ({ name, validation, label, properties }) => {
 
   inputReturned =
     properties.type !== "file" ? (
-      <input
+      <NormalInput
         name={name}
         {...properties}
         onChange={changeValue}
@@ -39,9 +40,9 @@ export const Field = ({ name, validation, label, properties }) => {
 
   return (
     <>
-      <label htmlFor={name}>{label}</label>
+      <Label htmlFor={name}>{label}</Label>
       {inputReturned}
-      {validate && <p>{validate}</p>}
+      {validate && <ErrorMessage>{validate}</ErrorMessage>}
     </>
   )
 }

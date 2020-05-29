@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Field } from "../Field"
+import { StyledForm } from "./styles"
 
 export const Form = ({ fields }) => {
   console.log(JSON.stringify(fields))
@@ -30,7 +31,7 @@ export const Form = ({ fields }) => {
   }
 
   return (
-    <form onSubmit={onSubmit}>
+    <StyledForm onSubmit={onSubmit}>
       {fields.map(field => {
         return (
           <React.Fragment key={field.name}>
@@ -41,6 +42,6 @@ export const Form = ({ fields }) => {
       })}
       <p>{formValidation}</p>
       <button type="submit">Submit</button>
-    </form>
+    </StyledForm>
   )
 }
