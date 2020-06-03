@@ -37,9 +37,9 @@ const Register = () => {
       },
     },
     {
-      name: "photo",
+      name: "avatar",
       validation: Validation.noValidation,
-      label: "Photo:",
+      label: "Avatar:",
       properties: {
         type: "file",
         alt: "File input",

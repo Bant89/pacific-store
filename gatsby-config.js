@@ -37,7 +37,9 @@ module.exports = {
     {
       resolve: `gatsby-source-pg`,
       options: {
-        connectionString: process.env.POSTGRES_URL,
+        // connectionString: process.env.POSTGRES_URL,
+        connectionString:
+          "postgres://bant:cesar5@localhost:5432/backendPacific_development",
         schema: "public",
         refetchInterval: 60,
       },

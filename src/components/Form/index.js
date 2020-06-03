@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Field } from "../Field"
 import { StyledForm } from "./styles"
+import axios from "axios"
 
 export const Form = ({ fields }) => {
   console.log(JSON.stringify(fields))
@@ -19,6 +20,25 @@ export const Form = ({ fields }) => {
 
     if (values.length === fields.length) {
       alert(JSON.stringify(values))
+      console.log(values)
+      let requestBody = {}
+      values.forEach(e => {
+        if (e.name !== "avatar") requestBody[e.name] = e.value
+        if (e.name === "password")
+          requestBody["password_confirmation"] = e.value
+      })
+      requestBody["is_admin"] = false
+      axios({
+        method: "post",
+        url: "http://localhost:3000/users",
+        data: requestBody,
+        headers: {
+          "Content-Type": "application/json",
+          cors: "no-mode",
+        },
+      })
+        .then(data => console.log(data))
+        .catch(error => console.error(error))
       setFormValidation("")
     } else {
       console.log(
