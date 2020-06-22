@@ -19,7 +19,7 @@ export const Header = ({ siteTitle }) => {
   useEffect(() => {
     const mediaQueryList = window.matchMedia("(min-width: 768px)")
     if (mediaQueryList.matches) setDisplay(true)
-  })
+  }, [])
 
   return (
     <StyledHeader>
@@ -39,8 +39,9 @@ export const Header = ({ siteTitle }) => {
             </IconButton>
           </HeaderItem>
           <HiddenContainer display={display ? "flex" : "none"}>
-            <HeaderItem>Stores</HeaderItem>
-            <HeaderItem>Products</HeaderItem>
+            <HeaderItem>
+              <StyledLink to="/products">Products</StyledLink>
+            </HeaderItem>
             <HeaderItem>Search</HeaderItem>
             <HeaderItem>Profile</HeaderItem>
             <HeaderItem>Shopping Cart</HeaderItem>

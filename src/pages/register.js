@@ -1,9 +1,8 @@
-import React, { useState } from "react"
-import axios from "axios"
-import { Form } from "../components/Form"
-import { Layout } from "../components/Layout"
+import React from "react"
+import { Form } from "components/Form"
+import { Layout } from "components/Layout"
 
-import { Validation } from "../utils/helpers"
+import { Validation } from "utils/helpers"
 
 const Register = () => {
   const fields = [

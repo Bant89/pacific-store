@@ -1,15 +1,6 @@
-import styled, { keyframes } from "styled-components"
+import styled from "styled-components"
 import { Link } from "gatsby"
 
-const changeColor = keyframes`
-  from {
-    background-color: rebeccapurple;
-  }
-
-  to {
-    background-color: #a053ed;
-  }
-`
 export const H1 = styled.h1`
   color: yellow;
   display: inline-block;

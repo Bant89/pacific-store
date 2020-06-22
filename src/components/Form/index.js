@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Field } from "../Field"
+import { Field } from "components/Field"
 import { StyledForm } from "./styles"
 
 export const Form = ({ fields }) => {
