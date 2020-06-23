@@ -8,4 +8,5 @@ export const Container = styled.div`
   justify-content: center;
   max-width: 960px;
   padding: 0 1.0875rem 1.45rem;
+  overflow-x: hidden;
 `

@@ -1,6 +1,5 @@
 import React from "react"
 import GridItem from "components/GridItem"
-import { Link } from "gatsby"
 import { MainContainer, ItemsContainer, StyledLink, Title } from "./styles"
 
 export default function GridList({ name = "Most selled", link = "#" }) {
