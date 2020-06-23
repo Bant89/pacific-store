@@ -43,7 +43,9 @@ export const Header = ({ siteTitle }) => {
               <StyledLink to="/products">Products</StyledLink>
             </HeaderItem>
             <HeaderItem>Search</HeaderItem>
-            <HeaderItem>Profile</HeaderItem>
+            <HeaderItem>
+              <StyledLink to="/profile">Profile</StyledLink>
+            </HeaderItem>
             <HeaderItem>Shopping Cart</HeaderItem>
           </HiddenContainer>
         </HeaderList>
