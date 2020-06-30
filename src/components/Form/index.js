@@ -2,8 +2,7 @@ import React, { useState } from "react"
 import { Field } from "components/Field"
 import { StyledForm } from "./styles"
 
-export const Form = ({ fields }) => {
-  console.log(JSON.stringify(fields))
+export const Form = ({ fields, setData }) => {
   const [formValidation, setFormValidation] = useState("")
 
   const onSubmit = event => {
@@ -18,14 +17,9 @@ export const Form = ({ fields }) => {
       .map(field => ({ name: field.name, value: field.value }))
 
     if (values.length === fields.length) {
-      alert(JSON.stringify(values))
+      setData(values)
       setFormValidation("")
     } else {
-      console.log(
-        `Values length ${values.length} and Field length ${fields.length}`
-      )
-      console.log(`Values: ${JSON.stringify(values)}`)
-      console.log(`Fields: ${JSON.stringify(fields)}`)
       setFormValidation("Missing fields")
     }
   }
