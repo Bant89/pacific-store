@@ -7,7 +7,7 @@ import { Validation } from "utils/helpers"
 
 export default function Login() {
   const [data, setData] = useState(null)
-  const { login, isLogged } = useUser()
+  const { login, isLogged, isLoginLoading, hasError } = useUser()
   const fields = [
     {
       name: "email",
@@ -43,7 +43,12 @@ export default function Login() {
 
   return (
     <Layout>
-      <Form fields={fields} setData={setData} />
+      {isLoginLoading ? (
+        <strong>Checking credentials </strong>
+      ) : (
+        <Form fields={fields} setData={setData} />
+      )}
+      {hasError && <h3>Something went wrong</h3>}
     </Layout>
   )
 }
