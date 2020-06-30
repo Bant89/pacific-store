@@ -3,7 +3,7 @@ import { NormalInput, Label, ErrorMessage } from "./styles"
 
 export const Field = ({ name, validation, label, properties }) => {
   const [inputValue, setInputValue] = useState("")
-  const [fileValue, setFileValue] = useState(undefined)
+  const [, setFileValue] = useState(undefined)
   const [validate, setValidation] = useState("")
   let inputReturned = undefined
 

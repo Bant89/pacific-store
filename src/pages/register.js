@@ -1,11 +1,13 @@
-import React, { useState } from "react"
-import axios from "axios"
-import { Form } from "../components/Form"
-import { Layout } from "../components/Layout"
-
-import { Validation } from "../utils/helpers"
+import React, { useState, useEffect } from "react"
+import { navigate } from "gatsby"
+import { Form } from "components/Form"
+import { Layout } from "components/Layout"
+import useUser from "hooks/useUser"
+import { Validation } from "utils/helpers"
 
 const Register = () => {
+  const [data, setData] = useState(null)
+  const { isCreationLoading, createUser, creationHasError } = useUser()
   const fields = [
     {
       name: "name",
@@ -47,9 +49,26 @@ const Register = () => {
     },
   ]
 
+  useEffect(() => {
+    if (Boolean(data)) {
+      let body = {}
+      data.forEach(e => {
+        body[e.name] = e.value
+      })
+      const bodyWithoutPhoto = ({ photo, ...rest }) => rest
+      let values = bodyWithoutPhoto(body)
+      createUser(values)
+      if (!isCreationLoading && !creationHasError) {
+        navigate("/")
+      }
+    }
+  }, [data])
+
   return (
     <Layout>
-      <Form fields={fields} />
+      <Form fields={fields} setData={setData} />
+      {isCreationLoading && <strong>Validating data</strong>}
+      {creationHasError && <strong>Something went wrong</strong>}
     </Layout>
   )
 }

@@ -1,5 +1,6 @@
 import PropTypes from "prop-types"
 import React, { useState, useEffect } from "react"
+import useUser from "hooks/useUser"
 import { IoMdMenu } from "react-icons/io"
 
 import {
@@ -15,11 +16,13 @@ import {
 
 export const Header = ({ siteTitle }) => {
   const [display, setDisplay] = useState(false)
+  const { isLogged, logout } = useUser()
 
   useEffect(() => {
     const mediaQueryList = window.matchMedia("(min-width: 768px)")
     if (mediaQueryList.matches) setDisplay(true)
-  })
+    console.log("IS LOGGED ", isLogged)
+  }, [isLogged])
 
   return (
     <StyledHeader>
@@ -32,17 +35,30 @@ export const Header = ({ siteTitle }) => {
             <IconButton
               onClick={() => {
                 setDisplay(!display)
-                console.log("TEnemo to")
               }}
             >
               <IoMdMenu size="36px" />
             </IconButton>
           </HeaderItem>
           <HiddenContainer display={display ? "flex" : "none"}>
-            <HeaderItem>Stores</HeaderItem>
-            <HeaderItem>Products</HeaderItem>
+            <HeaderItem>
+              <StyledLink to="/products">Products</StyledLink>
+            </HeaderItem>
             <HeaderItem>Search</HeaderItem>
-            <HeaderItem>Profile</HeaderItem>
+            <HeaderItem>
+              {isLogged ? (
+                <StyledLink
+                  to="/"
+                  onClick={() => {
+                    logout()
+                  }}
+                >
+                  Logout
+                </StyledLink>
+              ) : (
+                <StyledLink to="/login">Login</StyledLink>
+              )}
+            </HeaderItem>
             <HeaderItem>Shopping Cart</HeaderItem>
           </HiddenContainer>
         </HeaderList>
