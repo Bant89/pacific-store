@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "gatsby"
 import { IoIosStar } from "react-icons/io"
 import { FaDollarSign } from "react-icons/fa"
 import {
@@ -11,11 +12,13 @@ import {
 export default function GridItem() {
   return (
     <Card>
+    <Link to="/productDetail">
       <ProductImage
         src="https://loremflickr.com/150/150"
         alt="placeholderImage"
       />
       <ProductName> Name of product </ProductName>
+      </Link>
       <DetailContainer>
         <DetailInfo>
           <IoIosStar color="orange" />
