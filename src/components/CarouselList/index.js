@@ -2,7 +2,7 @@ import React from "react"
 import CarouselItem from "components/CarouselItem"
 import { MainContainer, ItemContainer } from "./styles"
 
-export default function CarouselList() {
+export default function CarouselList({ title }) {
   let ans = []
 
   for (let i = 0; i < 3; i++) {
@@ -10,7 +10,7 @@ export default function CarouselList() {
   }
   return (
     <MainContainer>
-      <h3>Categories</h3>
+      <h3>{title}</h3>
       <ItemContainer>{ans}</ItemContainer>
       <a href="#">See more</a>
     </MainContainer>

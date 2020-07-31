@@ -12,7 +12,7 @@ export default function Products() {
         <GridList />
       </section>
       <section>
-        <CarouselList />
+        <CarouselList title="Categories" />
       </section>
       <section>
         <GridList />

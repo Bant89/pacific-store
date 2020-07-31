@@ -32,7 +32,7 @@
     "typography-theme-lincoln": "^0.16.19"
   },
   "devDependencies": {
-    "cypress": "^4.5.0",
+    "cypress": "^4.11.0",
     "prettier": "2.0.5",
     "start-server-and-test": "^1.11.0"
   },
@@ -41,10 +41,10 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "npx --node-arg '-r esm' gatsby build",
-    "develop": "npx --node-arg '-r esm' gatsby develop",
+    "build": " gatsby build",
+    "develop": " gatsby develop",
     "start": "npm run develop",
-    "serve": "npx --node-arg '-r esm' gatsby serve",
+    "serve": " gatsby serve",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
