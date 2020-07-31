@@ -6,6 +6,7 @@ export const ReviewContainer = styled.div`
   outline: 1px solid black;
   margin: 1em 0;
   padding: 1em;
+  max-width: 400px;
 `
 
 export const ReviewImage = styled.img`
