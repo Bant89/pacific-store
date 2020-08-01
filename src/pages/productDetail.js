@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "gatsby"
+import useShoppingCart from "hooks/useShoppingCart"
 import { Layout } from "components/Layout"
 import CarouselList from "components/CarouselList"
 import ReviewList from "components/ReviewList"
@@ -14,6 +14,17 @@ import {
 } from "styles/productDetail"
 
 export default function ProductDetail() {
+  const { addItem } = useShoppingCart()
+  const handleAddButton = () => {
+    let element = {
+      name: "Amazing item",
+      quantity: 5,
+      price: 55.4,
+      id: Math.random() * (100 - 1) + 1,
+    }
+    console.log("aqui")
+    addItem(element)
+  }
   return (
     <Layout>
       <ProductDetailContainer>
@@ -23,7 +34,9 @@ export default function ProductDetail() {
             src="https://loremflickr.com/400/400"
             alt="product placeholder image"
           />
-          <ProductDetailButton>Add to cart</ProductDetailButton>
+          <ProductDetailButton onClick={handleAddButton}>
+            Add to cart
+          </ProductDetailButton>
         </ProductDetailMultimedia>
         <ProductDetailInfo>
           <h3>Description</h3>
