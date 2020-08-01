@@ -5,9 +5,14 @@
  */
 import React from "react"
 import { UserContextProvider } from "context/UserContext"
+import { ShoppingContextProvider } from "context/ShoppingContext"
 
 // You can delete this file if you're not using it
 
 export function wrapRootElement({ element }) {
-  return <UserContextProvider>{element}</UserContextProvider>
+  return (
+    <UserContextProvider>
+      <ShoppingContextProvider>{element}</ShoppingContextProvider>
+    </UserContextProvider>
+  )
 }

@@ -59,7 +59,9 @@ export const Header = ({ siteTitle }) => {
                 <StyledLink to="/login">Login</StyledLink>
               )}
             </HeaderItem>
-            <HeaderItem>Shopping Cart</HeaderItem>
+            <HeaderItem>
+              <StyledLink to="/shoppingCart">Shopping Cart</StyledLink>
+            </HeaderItem>
           </HiddenContainer>
         </HeaderList>
       </Container>

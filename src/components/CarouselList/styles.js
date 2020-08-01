@@ -7,4 +7,6 @@ export const ItemContainer = styled.div`
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
 `
-export const MainContainer = styled.div``
+export const MainContainer = styled.div`
+  margin: 1em 0;
+`
