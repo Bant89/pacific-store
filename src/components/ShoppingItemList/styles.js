@@ -2,7 +2,6 @@ import styled from "styled-components"
 
 export const Container = styled.div`
   display: flex;
-
   @media (max-width: 768px) {
     flex-direction: column;
     width: 300px;
@@ -22,4 +21,7 @@ export const ProductsContainer = styled.div`
 
 export const Summary = styled.div`
   background-color: lightblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `

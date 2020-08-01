@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { Link } from "gatsby"
 import useShoppingCart from "hooks/useShoppingCart"
 import ShoppingItem from "components/ShoppingItem"
 import { ProductsContainer, Summary, Container } from "./styles"
@@ -20,6 +21,7 @@ export default function ShoppingItemList() {
         <h2>Summary</h2>
         <h3>Amount of items: {quantityOfItems}</h3>
         <h3>Total: $ {sumOfPrices.toFixed(2)}</h3>
+        <Link to="/orderConfirmation">Continue to checkout</Link>
       </Summary>
       <ProductsContainer>
         {shoppingItems.map(item => (
