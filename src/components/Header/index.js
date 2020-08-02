@@ -42,6 +42,9 @@ export const Header = ({ siteTitle }) => {
           </HeaderItem>
           <HiddenContainer display={display ? "flex" : "none"}>
             <HeaderItem>
+              <StyledLink to="/stores">Stores</StyledLink>
+            </HeaderItem>
+            <HeaderItem>
               <StyledLink to="/products">Products</StyledLink>
             </HeaderItem>
             <HeaderItem>Search</HeaderItem>

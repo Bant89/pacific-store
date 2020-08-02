@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { NormalInput, Label, ErrorMessage } from "./styles"
+import { NormalInput, Label, ErrorMessage, StyledTextArea } from "./styles"
 
 export const Field = ({ name, validation, label, properties }) => {
   const [inputValue, setInputValue] = useState("")
@@ -26,17 +26,30 @@ export const Field = ({ name, validation, label, properties }) => {
     }
   }
 
-  inputReturned =
-    properties.type !== "file" ? (
-      <NormalInput
-        name={name}
-        {...properties}
-        onChange={changeValue}
-        value={inputValue}
-      />
-    ) : (
-      <input name={name} {...properties} onChange={changeFileValue} />
-    )
+  switch (properties.type) {
+    case "file":
+      inputReturned = (
+        <input name={name} {...properties} onChange={changeFileValue} />
+      )
+    case "textarea":
+      inputReturned = (
+        <StyledTextArea
+          name={name}
+          value={inputValue}
+          onChange={changeValue}
+          {...properties}
+        />
+      )
+    default:
+      inputReturned = (
+        <NormalInput
+          name={name}
+          {...properties}
+          onChange={changeValue}
+          value={inputValue}
+        />
+      )
+  }
 
   return (
     <>

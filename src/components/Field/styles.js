@@ -9,6 +9,14 @@ export const NormalInput = styled.input`
   max-width: 315px;
 `
 
+export const StyledTextArea = styled.textarea`
+  background: transparent;
+  margin-bottom: 0.5em;
+  border: 1 px solid #333;
+  max-width: 315px;
+  resize: none;
+`
+
 export const Label = styled.label`
   text-transform: uppercase;
   color: #a590ad;
