@@ -20,9 +20,9 @@ export default function ProductDetail() {
       name: "Amazing item",
       quantity: 5,
       price: 55.4,
+      selectedQuantity: 1,
       id: Math.random() * (100 - 1) + 1,
     }
-    console.log("aqui")
     addItem(element)
   }
   return (

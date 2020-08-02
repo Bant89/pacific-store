@@ -9,18 +9,28 @@ import {
 } from "./styles"
 
 export default function ShoppingItem({ element, changePrice, changeAmount }) {
-  const [quantity, setQuantity] = useState(1)
+  const [quantity, setQuantity] = useState(element.selectedQuantity)
   const { name, price } = element
   const increment = () => {
+    if (quantity + 1 > element.quantity) {
+      alert("Cant order more items, out of stock")
+      return
+    }
     setQuantity(state => state + 1)
     changePrice(currentPrice => currentPrice + price)
     changeAmount(state => state + 1)
+    element.selectedQuantity++
   }
 
   const decrement = () => {
+    if (quantity - 1 == 0) {
+      alert("Cant order negative items")
+      return
+    }
     setQuantity(state => state - 1)
     changePrice(currentPrice => currentPrice - price)
     changeAmount(state => state - 1)
+    element.selectedQuantity--
   }
 
   return (
