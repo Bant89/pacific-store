@@ -9,4 +9,6 @@ export const ItemContainer = styled.div`
 `
 export const MainContainer = styled.div`
   margin: 1em 0;
+  max-width: 100vw;
+  text-align: center;
 `

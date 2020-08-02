@@ -18,6 +18,7 @@ export const Title = styled.h2`
 
 export const MainContainer = styled.div`
   text-align: left;
+  margin: 1em 0;
 `
 
 export const StyledLink = styled(Link)`

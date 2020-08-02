@@ -5,7 +5,7 @@ import { MainContainer, ItemContainer } from "./styles"
 export default function CarouselList({ title }) {
   let ans = []
 
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 6; i++) {
     ans.push(<CarouselItem />)
   }
   return (
