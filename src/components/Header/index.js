@@ -19,10 +19,15 @@ export const Header = ({ siteTitle }) => {
   const { isLogged, logout } = useUser()
 
   useEffect(() => {
-    const mediaQueryList = window.matchMedia("(min-width: 768px)")
-    if (mediaQueryList.matches) setDisplay(true)
-    console.log("IS LOGGED ", isLogged)
-  }, [isLogged])
+    const handleResize = () => {
+      if (window.innerWidth > 768) setDisplay(true)
+    }
+    window.addEventListener("resize", handleResize)
+
+    return function cleanup() {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
 
   return (
     <StyledHeader>

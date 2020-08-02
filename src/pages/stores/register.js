@@ -19,16 +19,6 @@ export default function StoreRegister() {
       },
     },
     {
-      name: "email",
-      validation: Validation.email,
-      label: "Email:",
-      properties: {
-        type: "email",
-        alt: "Email input",
-        placeholder: "user@email.com",
-      },
-    },
-    {
       name: "description",
       validation: Validation.noValidation,
       label: "Description:",
@@ -42,9 +32,9 @@ export default function StoreRegister() {
       },
     },
     {
-      name: "avatar",
+      name: "image",
       validation: Validation.noValidation,
-      label: "Avatar:",
+      label: "Image:",
       properties: {
         type: "file",
         alt: "File input",
@@ -64,6 +54,7 @@ export default function StoreRegister() {
       //   if (!isCreationLoading && !creationHasError) {
       //     navigate("/")
       //   }
+      console.log(data)
     }
   }, [data])
   return (
