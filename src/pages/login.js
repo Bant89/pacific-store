@@ -1,34 +1,26 @@
 import React, { useState, useEffect } from "react"
 import { navigate } from "gatsby"
-import { Form } from "components/Form"
+import * as Yup from "yup"
+import { Formik, Form } from "formik"
+import Field from "../components/Field"
 import { Layout } from "components/Layout"
 import useUser from "hooks/useUser"
-import { Validation } from "utils/helpers"
+import {
+  MainFormContainer,
+  FormContainer,
+  FieldSection,
+  ActionSection,
+} from "../styles/formStyles";
+
+const LoginSchema = Yup.object().shape({
+  email: Yup.string().email("Email inválido").required("Requerido"),
+  password: Yup.string().required("Requerido")
+})
 
 export default function Login() {
   const [data, setData] = useState(null)
   const { login, isLogged, isLoginLoading, hasError } = useUser()
-  const fields = [
-    {
-      name: "email",
-      validation: Validation.email,
-      label: "Email",
-      properties: {
-        type: "email",
-        alt: "Email input",
-        placeholder: "user@email.com",
-      },
-    },
-    {
-      name: "password",
-      validation: Validation.noValidation,
-      label: "Password",
-      properties: {
-        type: "password",
-        alt: "Password input",
-      },
-    },
-  ]
+
 
   useEffect(() => {
     if (Boolean(data)) {
@@ -46,8 +38,45 @@ export default function Login() {
       {isLoginLoading ? (
         <strong>Checking credentials </strong>
       ) : (
-        <Form fields={fields} setData={setData} />
-      )}
+          <MainFormContainer>
+            <h1>Crea una cuenta en Pacific Stores</h1>
+            <Formik
+              initialValues={{
+                email: "",
+                password: ""
+              }}
+              validationSchema={LoginSchema}
+              onSubmit={(values) => console.log(values)}
+            >
+              {({ errors, touched }) => (
+                <Form>
+                  <FormContainer>
+                    <FieldSection>
+                      <Field
+                        type="email"
+                        name="email"
+                        label="Correo electrónico"
+                        errorMessage={errors.email}
+                        isTouched={touched.email}
+                      />
+
+                      <Field
+                        type="password"
+                        name="password"
+                        label="Contraseña"
+                        errorMessage={errors.password}
+                        isTouched={touched.password}
+                      />
+                    </FieldSection>
+                    <ActionSection>
+                      <button type="submit">Login</button>
+                    </ActionSection>
+                  </FormContainer>
+                </Form>
+              )}
+            </Formik>
+          </MainFormContainer>
+        )}
       {hasError && <h3>Something went wrong</h3>}
     </Layout>
   )

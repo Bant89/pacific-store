@@ -31,7 +31,7 @@ export default function ProductDetail() {
         <ProductDetailMultimedia>
           <h1>Product Detail</h1>
           <ProductDetailImage
-            src="https://loremflickr.com/400/400"
+            src="./images/productPlaceholder.jpg"
             alt="product placeholder image"
           />
           <ProductDetailButton onClick={handleAddButton}>

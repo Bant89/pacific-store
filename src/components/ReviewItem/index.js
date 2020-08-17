@@ -13,7 +13,7 @@ export default function ReviewItem() {
     <ReviewContainer>
       <ReviewProfile>
         <ReviewImage
-          src="https://loremflickr.com/50/50"
+          src="./images/productPlaceholder.jpg"
           alt="placeholderImage"
         />
         <ReviewerName>Name</ReviewerName>

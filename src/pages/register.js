@@ -1,74 +1,97 @@
 import React, { useState, useEffect } from "react"
 import { navigate } from "gatsby"
-import { Form } from "components/Form"
+import * as Yup from "yup"
+import { Formik, Form } from "formik"
+import Field, { FileUploader } from "../components/Field"
 import { Layout } from "components/Layout"
 import useUser from "hooks/useUser"
-import { Validation } from "utils/helpers"
+import {
+  MainFormContainer,
+  FormContainer,
+  FieldSection,
+  ActionSection,
+} from "../styles/formStyles";
+
+const RegisterUserSchema = Yup.object().shape({
+  name: Yup.string().required("Requerido"),
+  email: Yup.string().email("Email inválido").required("Requerido"),
+  password: Yup.string().required("Requerido"),
+  password_confirmation: Yup.mixed().oneOf([Yup.ref('password'), null], 'Contraseñas deben ser idénticas'),
+  is_admin: Yup.boolean().default(true),
+  image: Yup.mixed()
+})
+
 
 const Register = () => {
   const [data, setData] = useState(null)
   const { isCreationLoading, createUser, creationHasError } = useUser()
-  const fields = [
-    {
-      name: "name",
-      validation: Validation.name,
-      label: "Name:",
-      properties: {
-        type: "text",
-        alt: "Name input",
-        placeholder: "John Fisherman",
-      },
-    },
-    {
-      name: "email",
-      validation: Validation.email,
-      label: "Email:",
-      properties: {
-        type: "email",
-        alt: "Email input",
-        placeholder: "user@email.com",
-      },
-    },
-    {
-      name: "password",
-      validation: Validation.password,
-      label: "Password:",
-      properties: {
-        type: "password",
-        alt: "Password input",
-      },
-    },
-    {
-      name: "avatar",
-      validation: Validation.noValidation,
-      label: "Avatar:",
-      properties: {
-        type: "file",
-        alt: "File input",
-      },
-    },
-  ]
 
-  useEffect(() => {
-    if (Boolean(data)) {
-      let body = {}
-      data.forEach(e => {
-        body[e.name] = e.value
-      })
-      const bodyWithoutPhoto = ({ photo, ...rest }) => rest
-      let values = bodyWithoutPhoto(body)
-      createUser(values)
-      if (!isCreationLoading && !creationHasError) {
-        navigate("/")
-      }
-    }
-  }, [data])
+
+  // useEffect(() => {
+
+  //   if (!isCreationLoading && !creationHasError) {
+  //     navigate("/")
+  //   }
+  // }, [data])
 
   return (
     <Layout>
-      <Form fields={fields} setData={setData} />
-      {isCreationLoading && <strong>Validating data</strong>}
-      {creationHasError && <strong>Something went wrong</strong>}
+      <MainFormContainer>
+        <h1>Crea una cuenta en Pacific Stores</h1>
+        <Formik
+          initialValues={{
+            name: "",
+            email: "",
+            password: "",
+            password_confirmation: "",
+            image: ""
+          }}
+          validationSchema={RegisterUserSchema}
+          onSubmit={(values) => console.log(values)}
+        >
+          {({ errors, touched }) => (
+            <Form>
+              <FormContainer>
+                <FieldSection>
+                  <Field
+                    name="name"
+                    label="Nombre"
+                    errorMessage={errors.name}
+                    isTouched={touched.name}
+                  />
+                  <Field
+                    type="email"
+                    name="email"
+                    label="Correo electrónico"
+                    errorMessage={errors.email}
+                    isTouched={touched.email}
+                  />
+                  <Field
+                    type="password"
+                    name="password"
+                    label="Contraseña"
+                    errorMessage={errors.password}
+                    isTouched={touched.password}
+                  />
+                  <Field
+                    type="password"
+                    name="password_confirmation"
+                    label="Confirmación contraseña"
+                    errorMessage={errors.password_confirmation}
+                    isTouched={touched.password_confirmation}
+                  />
+                  <FileUploader />
+                </FieldSection>
+                <ActionSection>
+                  <button type="submit">Crear cuenta</button>
+                </ActionSection>
+              </FormContainer>
+            </Form>
+          )}
+        </Formik>
+        {isCreationLoading && <strong>Validating data</strong>}
+        {creationHasError && <strong>Something went wrong</strong>}
+      </MainFormContainer>
     </Layout>
   )
 }

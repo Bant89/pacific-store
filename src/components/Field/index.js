@@ -1,61 +1,93 @@
-import React, { useState } from "react"
-import { NormalInput, Label, ErrorMessage, StyledTextArea } from "./styles"
+import React, { useRef } from "react";
+import { StyledLabel, StyledField, ErrorMessage } from "./styles";
 
-export const Field = ({ name, validation, label, properties }) => {
-  const [inputValue, setInputValue] = useState("")
-  const [, setFileValue] = useState(undefined)
-  const [validate, setValidation] = useState("")
-  let inputReturned = undefined
+export default function Field({
+  type = "text",
+  name,
+  label,
+  errorMessage,
+  isTouched,
+  component,
+  placeholder,
+}) {
+  return (
+    <>
+      <StyledLabel htmlFor={name}>{label}</StyledLabel>
+      <StyledField
+        type={type}
+        name={name}
+        component={component}
+        placeholder={placeholder}
+      />
+      {errorMessage && isTouched ? (
+        <ErrorMessage>{errorMessage}</ErrorMessage>
+      ) : null}
+    </>
+  );
+}
 
-  const changeValue = event => {
-    const { value } = event.target
-    setInputValue(value)
+export function SelectField({
+  name,
+  label,
+  placeholder,
+  children,
+  errorMessage,
+  isTouched,
+}) {
+  return (
+    <>
+      <StyledLabel htmlFor={name}>{label}</StyledLabel>
+      <StyledField component="select" name={name} placeholder={placeholder}>
+        {children}
+      </StyledField>
+      {errorMessage && isTouched ? (
+        <ErrorMessage>{errorMessage}</ErrorMessage>
+      ) : null}
+    </>
+  );
+}
 
-    if (!validation(value)) {
-      setValidation("")
-    } else {
-      setValidation(validation(value))
+export function FileUploader() {
+  const imgEl = useRef(null),
+    inputEl = useRef(null);
+  const handleChange = (event) => {
+    event.persist();
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.addEventListener(
+      "load",
+      function () {
+        imgEl.current.src = reader.result;
+      },
+      false
+    );
+
+    if (file) {
+      reader.readAsDataURL(file);
     }
-  }
+  };
 
-  const changeFileValue = event => {
-    if (properties.multiple) {
-      setFileValue(event.target.files)
-    } else {
-      setFileValue(event.target.files[0])
-    }
-  }
-
-  switch (properties.type) {
-    case "file":
-      inputReturned = (
-        <input name={name} {...properties} onChange={changeFileValue} />
-      )
-    case "textarea":
-      inputReturned = (
-        <StyledTextArea
-          name={name}
-          value={inputValue}
-          onChange={changeValue}
-          {...properties}
-        />
-      )
-    default:
-      inputReturned = (
-        <NormalInput
-          name={name}
-          {...properties}
-          onChange={changeValue}
-          value={inputValue}
-        />
-      )
-  }
+  const handleClick = (event) => {
+    event.preventDefault();
+    inputEl.current.click();
+  };
 
   return (
     <>
-      <Label htmlFor={name}>{label}</Label>
-      {inputReturned}
-      {validate && <ErrorMessage>{validate}</ErrorMessage>}
+      <img
+        src="./images/storePlaceholder.png"
+        ref={imgEl}
+        alt="uploaded by the user"
+        style={{ width: "100%", height: "100%" }}
+      />
+      <input
+        type="file"
+        id="input"
+        onChange={handleChange}
+        style={{ display: "none" }}
+        ref={inputEl}
+      />
+      <button onClick={handleClick}>Upload a photo</button>
     </>
-  )
+  );
 }

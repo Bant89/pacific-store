@@ -35,7 +35,7 @@ export default function ShoppingItem({ element, changePrice, changeAmount }) {
 
   return (
     <Card>
-      <ItemImage src="https://loremflickr.com/150/150" alt="item image" />
+      <ItemImage src="./images/productPlaceholder.jpg" alt="item image" />
       <ItemInfoSection>
         <h4>Product: {name}</h4>
         <h4>Price: ${price}</h4>

@@ -6,8 +6,8 @@ export default function CarouselItem() {
   return (
     <Container>
       <Link to="/productDetail">
-      <Image src="https://loremflickr.com/200/150" alt="category image" />
-      <CategoryName>Category Name</CategoryName>
+        <Image src="./images/productPlaceholder.jpg" alt="category image" />
+        <CategoryName>Category Name</CategoryName>
       </Link>
     </Container>
   )

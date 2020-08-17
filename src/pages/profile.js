@@ -56,7 +56,7 @@ export default function Profile() {
       <Container>
         <TopInfo>
           <TextElement>Profile</TextElement>
-          <img src="https://loremflickr.com/250/150" alt="profilepic" />
+          <img src="./images/productPlaceholder.jpg" alt="profilepic" />
           <TextElement>Name:</TextElement>
           <TextElement content>John Fisher</TextElement>
           <TextElement>Email:</TextElement>

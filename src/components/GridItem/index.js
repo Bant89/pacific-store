@@ -20,14 +20,14 @@ export default function GridItem({
     type === "product" ? (
       <FaDollarSign color="green" />
     ) : (
-      <FaConciergeBell color="red" />
-    )
+        <FaConciergeBell color="red" />
+      )
   const text = type === "product" ? `${price} Price` : `${orders} Orders`
   return (
     <Card>
       <Link to="/productDetail">
         <ProductImage
-          src="https://loremflickr.com/150/150"
+          src="./images/productPlaceholder.jpg"
           alt="placeholderImage"
         />
         <ProductName> Name of {name} </ProductName>
