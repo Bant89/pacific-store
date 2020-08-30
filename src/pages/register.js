@@ -38,8 +38,7 @@ const Register = () => {
           }}
           validationSchema={RegisterUserSchema}
           onSubmit={(values) => {
-            // createUser(values)
-            console.log(values)
+            createUser(values)
           }}
         >
           {({ setFieldValue, errors, touched }) => (

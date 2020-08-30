@@ -52,6 +52,7 @@ export function SelectField({
 export function FileUploader({ setValue }) {
   const imgEl = useRef(null),
     inputEl = useRef(null);
+
   const handleChange = (event) => {
     event.persist();
     const file = event.target.files[0];
@@ -71,8 +72,8 @@ export function FileUploader({ setValue }) {
   };
 
   const handleClick = (event) => {
-    event.preventDefault();
     inputEl.current.click();
+    event.preventDefault();
   };
 
   return (

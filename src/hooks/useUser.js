@@ -1,10 +1,13 @@
-import { useCallback, useContext, useState } from "react"
-import Context from "context/UserContext"
+import { useCallback, useState } from "react"
 import loginService from "services/login"
 import registerService from "services/register"
+import uploadImageService from "services/uploadImage"
+import useLocalStorage from "hooks/useLocalStorage"
 
 export default function useUser() {
-  const { token, setToken } = useContext(Context)
+  const [userId, setUserId] = useLocalStorage("user-id", "")
+  const [, setImageUrl] = useLocalStorage("imageUrl", "")
+  const [, setToken] = useLocalStorage("auth_token", "")
   const [loadingState, setLoadingState] = useState({
     loading: false,
     error: false,
@@ -19,12 +22,11 @@ export default function useUser() {
       setLoadingState({ loading: true, error: false })
       loginService({ email, password })
         .then(token => {
-          window.sessionStorage.setItem("auth_token", token)
           setLoadingState({ loading: false, error: false })
           setToken(token)
         })
         .catch(err => {
-          window.sessionStorage.removeItem("auth_token")
+          setToken(null)
           setLoadingState({ loading: false, error: true })
           console.error(err)
         })
@@ -33,36 +35,51 @@ export default function useUser() {
   )
 
   const createUser = useCallback(
-    ({ name, password, email }) => {
+    async ({ name, email, password, image }) => {
       setCreationState({ loading: true, error: null })
-      registerService({ name, password, email })
-        .then(data => {
-          window.sessionStorage.setItem("auth_token", data.auth_token)
-          setCreationState({ loading: false, error: null })
-          setToken(token)
-        })
-        .catch(err => {
-          window.sessionStorage.removeItem("auth_token")
-          setCreationState({ loading: false, error: err })
+      let userId = null
+      try {
+        const data = await registerService({ name, email, password })
+        const { user } = data
+        setUserId(user.id)
+        setCreationState({ loading: false, error: null })
+        userId = user.id
+      } catch (err) {
+        setUserId(null)
+        setToken(null)
+        setCreationState({ loading: false, error: err })
+        console.error(err)
+      }
+
+      if (userId !== null) {
+        try {
+          const result = await uploadImageService(userId, image)
+          const { data } = result
+          const { image_url } = data
+          setImageUrl(image_url)
+        } catch (err) {
+          console.log('Image error')
           console.error(err)
-        })
+        }
+      }
+
     },
-    [token, setToken, setCreationState]
+    [setCreationState, setImageUrl, setUserId, setToken]
   )
 
   const logout = useCallback(() => {
-    window.sessionStorage.removeItem("auth_token")
+    setUserId(null)
     setToken(null)
-  }, [setToken])
+  }, [setUserId, setToken])
 
   return {
-    isLogged: Boolean(token),
+    isLogged: Boolean(userId),
     isLoginLoading: loadingState.loading,
     hasError: loadingState.error,
     isCreationLoading: creationState.loading,
     creationHasError: creationState.error,
     login,
     createUser,
-    logout,
+    logout
   }
 }
