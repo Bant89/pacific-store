@@ -34,8 +34,7 @@ export default function Login() {
               }}
               validationSchema={LoginSchema}
               onSubmit={(values) => {
-                // login(values)
-                console.log(values)
+                login(values)
               }}
             >
               {({ errors, touched }) => (
