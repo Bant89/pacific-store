@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import Button from "../Button"
 import { StyledLabel, StyledField, ErrorMessage } from "./styles";
+import avatarPlaceholder from "../../static/images/avatarPlaceholder.jpg";
 
 export default function Field({
   type = "text",
@@ -77,10 +78,10 @@ export function FileUploader({ setValue }) {
   return (
     <>
       <img
-        src="./images/storePlaceholder.png"
+        src={avatarPlaceholder}
         ref={imgEl}
         alt="uploaded by the user"
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "75%", height: "75%", margin: "0.5em auto" }}
       />
       <input
         type="file"

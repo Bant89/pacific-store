@@ -1,5 +1,6 @@
 import React from "react"
 import * as Yup from "yup"
+import { Link } from "gatsby"
 import { Formik, Form } from "formik"
 import Field from "../components/Field"
 import { Layout } from "components/Layout"
@@ -64,6 +65,12 @@ export default function Login() {
                 </Form>
               )}
             </Formik>
+            <p>
+              Don't have an account?
+            </p>
+            <Link to="/register">
+              Register
+              </Link>
           </MainFormContainer>
         )}
       {hasError && <h3>Something went wrong</h3>}

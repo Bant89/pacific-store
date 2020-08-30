@@ -5,7 +5,7 @@ export const FormContainer = styled.div`
   padding: 1em;
   display: grid;
   height: auto;
-  width: auto;
+  width: 35vw;
   justify-items: center;
   align-items: center;
   grid-template-areas:

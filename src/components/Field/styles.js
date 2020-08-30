@@ -7,7 +7,7 @@ export const StyledField = styled(Field)`
   margin-bottom: 1em;
   resize: none;
   line-height: 1.5em;
-  width: 25vw;
+  width: 90%;
   text-align: left;
   padding: 0.5em;
   @media (max-width: 768px) {
