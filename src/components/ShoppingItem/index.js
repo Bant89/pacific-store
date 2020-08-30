@@ -23,7 +23,7 @@ export default function ShoppingItem({ element, changePrice, changeAmount }) {
   }
 
   const decrement = () => {
-    if (quantity - 1 == 0) {
+    if (quantity - 1 === 0) {
       alert("Cant order negative items")
       return
     }

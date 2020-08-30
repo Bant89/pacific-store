@@ -9,4 +9,5 @@ export const Container = styled.div`
   max-width: 1200px;
   padding: 0 1.0875rem 1.45rem;
   overflow-x: hidden;
+  font-family: 'Open Sans', Ubuntu;
 `

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react"
-import { navigate } from "gatsby"
+import React from "react"
 import * as Yup from "yup"
 import { Formik, Form } from "formik"
 import Field, { FileUploader } from "../components/Field"
@@ -23,16 +22,7 @@ const RegisterUserSchema = Yup.object().shape({
 
 
 const Register = () => {
-  const [data, setData] = useState(null)
   const { isCreationLoading, createUser, creationHasError } = useUser()
-
-
-  // useEffect(() => {
-
-  //   if (!isCreationLoading && !creationHasError) {
-  //     navigate("/")
-  //   }
-  // }, [data])
 
   return (
     <Layout>
@@ -47,9 +37,12 @@ const Register = () => {
             image: ""
           }}
           validationSchema={RegisterUserSchema}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={(values) => {
+            // createUser(values)
+            console.log(values)
+          }}
         >
-          {({ errors, touched }) => (
+          {({ setFieldValue, errors, touched }) => (
             <Form>
               <FormContainer>
                 <FieldSection>
@@ -80,7 +73,7 @@ const Register = () => {
                     errorMessage={errors.password_confirmation}
                     isTouched={touched.password_confirmation}
                   />
-                  <FileUploader />
+                  <FileUploader setValue={setFieldValue} />
                 </FieldSection>
                 <ActionSection>
                   <button type="submit">Crear cuenta</button>

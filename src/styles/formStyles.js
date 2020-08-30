@@ -30,7 +30,6 @@ export const FieldSection = styled.div`
   width: 20vw;
   min-width: 275px;
   text-align: left;
-  border-right: 1px solid rgba(0, 0, 0, 0.5);
   border-bottom: none;
   @media (max-width: 768px) {
     border-right: none;
@@ -44,7 +43,7 @@ export const MainFormContainer = styled.div`
   width: auto;
   border: 1px solid rgba(0, 0, 0, 0.5);
   padding: 3em;
-  border-radius: 50px;
+  border-radius: 10px;
   -webkit-box-shadow: 0px 20px 5px 0px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 0px 20px 5px 0px rgba(0, 0, 0, 0.4);
   box-shadow: 0px 20px 5px 0px rgba(0, 0, 0, 0.4);

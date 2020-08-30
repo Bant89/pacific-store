@@ -1,4 +1,4 @@
-import { useCallback, useContext } from "react"
+import { useContext } from "react"
 import Context from "context/ShoppingContext"
 
 export default function useShoppingCart() {
@@ -9,7 +9,7 @@ export default function useShoppingCart() {
   }
 
   const removeItem = ({ id }) => {
-    setShoppingItems(items => items.filter(element => element.id != id))
+    setShoppingItems(items => items.filter(element => element.id !== id))
   }
 
   const removeAllItems = () => setShoppingItems([])

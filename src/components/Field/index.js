@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import Button from "../Button"
 import { StyledLabel, StyledField, ErrorMessage } from "./styles";
 
 export default function Field({
@@ -47,12 +48,13 @@ export function SelectField({
   );
 }
 
-export function FileUploader() {
+export function FileUploader({ setValue }) {
   const imgEl = useRef(null),
     inputEl = useRef(null);
   const handleChange = (event) => {
     event.persist();
     const file = event.target.files[0];
+    setValue("image", file, false)
     const reader = new FileReader();
     reader.addEventListener(
       "load",
@@ -87,7 +89,7 @@ export function FileUploader() {
         style={{ display: "none" }}
         ref={inputEl}
       />
-      <button onClick={handleClick}>Upload a photo</button>
+      <Button onClick={handleClick}>Upload a photo</Button>
     </>
   );
 }

@@ -12,7 +12,7 @@ export default function CarouselList({ title }) {
     <MainContainer>
       <h3>{title}</h3>
       <ItemContainer>{ans}</ItemContainer>
-      <a href="#">See more</a>
+      <a href="/probando">See more</a>
     </MainContainer>
   )
 }

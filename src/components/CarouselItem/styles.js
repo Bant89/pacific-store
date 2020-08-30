@@ -13,4 +13,6 @@ export const CategoryName = styled.h3`
 
 export const Image = styled.img`
   margin: 0;
+  width: 200px;
+  height: 150px;
 `

@@ -9,6 +9,7 @@ import {
   DetailContainer,
   DetailInfo,
 } from "./styles"
+import storePlaceholder from "../../static/images/storePlaceholder.jpg"
 export default function GridItem({
   type = "product",
   name = "product",
@@ -27,7 +28,7 @@ export default function GridItem({
     <Card>
       <Link to="/productDetail">
         <ProductImage
-          src="./images/productPlaceholder.jpg"
+          src={storePlaceholder}
           alt="placeholderImage"
         />
         <ProductName> Name of {name} </ProductName>

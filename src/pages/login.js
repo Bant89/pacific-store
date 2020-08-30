@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react"
-import { navigate } from "gatsby"
+import React from "react"
 import * as Yup from "yup"
 import { Formik, Form } from "formik"
 import Field from "../components/Field"
@@ -18,20 +17,7 @@ const LoginSchema = Yup.object().shape({
 })
 
 export default function Login() {
-  const [data, setData] = useState(null)
   const { login, isLogged, isLoginLoading, hasError } = useUser()
-
-
-  useEffect(() => {
-    if (Boolean(data)) {
-      let body = {}
-      data.forEach(e => {
-        body[e.name] = e.value
-      })
-      login({ ...body })
-    }
-    if (isLogged) navigate("/")
-  }, [data, isLogged])
 
   return (
     <Layout>
@@ -46,7 +32,10 @@ export default function Login() {
                 password: ""
               }}
               validationSchema={LoginSchema}
-              onSubmit={(values) => console.log(values)}
+              onSubmit={(values) => {
+                // login(values)
+                console.log(values)
+              }}
             >
               {({ errors, touched }) => (
                 <Form>

@@ -47,7 +47,7 @@ export default function useUser() {
           console.error(err)
         })
     },
-    [setToken, setCreationState]
+    [token, setToken, setCreationState]
   )
 
   const logout = useCallback(() => {

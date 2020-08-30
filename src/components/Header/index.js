@@ -8,14 +8,14 @@ import {
   StyledLink,
   StyledHeader,
   Container,
+  HiddenContainer,
   HeaderList,
   HeaderItem,
-  IconButton,
-  HiddenContainer,
+  IconButton
 } from "./styles"
 
 export const Header = ({ siteTitle }) => {
-  const [display, setDisplay] = useState(false)
+  const [display, setDisplay] = useState(true)
   const { isLogged, logout } = useUser()
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export const Header = ({ siteTitle }) => {
               <IoMdMenu size="36px" />
             </IconButton>
           </HeaderItem>
-          <HiddenContainer display={display ? "flex" : "none"}>
+          {display && <HiddenContainer>
             <HeaderItem>
               <StyledLink to="/stores">Stores</StyledLink>
             </HeaderItem>
@@ -64,13 +64,13 @@ export const Header = ({ siteTitle }) => {
                   Logout
                 </StyledLink>
               ) : (
-                <StyledLink to="/login">Login</StyledLink>
-              )}
+                  <StyledLink to="/login">Login</StyledLink>
+                )}
             </HeaderItem>
             <HeaderItem>
-              <StyledLink to="/shoppingCart">Shopping Cart</StyledLink>
+              <StyledLink to="/shoppingCart">Cart</StyledLink>
             </HeaderItem>
-          </HiddenContainer>
+          </HiddenContainer>}
         </HeaderList>
       </Container>
     </StyledHeader>
