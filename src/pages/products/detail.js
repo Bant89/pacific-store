@@ -12,6 +12,7 @@ import {
   ProductDetailInfo,
   ProductDetailButton,
 } from "styles/productDetail"
+import productPlaceholder from "../../static/images/productPlaceholder.jpg"
 
 export default function ProductDetail() {
   const { addItem } = useShoppingCart()
@@ -31,7 +32,7 @@ export default function ProductDetail() {
         <ProductDetailMultimedia>
           <h1>Product Detail</h1>
           <ProductDetailImage
-            src="./images/productPlaceholder.jpg"
+            src={productPlaceholder}
             alt="product placeholder image"
           />
           <ProductDetailButton onClick={handleAddButton}>

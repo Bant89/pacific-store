@@ -26,7 +26,7 @@ export default function GridItem({
   const text = type === "product" ? `${price} Price` : `${orders} Orders`
   return (
     <Card>
-      <Link to="/productDetail">
+      <Link to="/products/detail">
         <ProductImage
           src={storePlaceholder}
           alt="placeholderImage"

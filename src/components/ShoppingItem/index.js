@@ -7,6 +7,7 @@ import {
   QuantityButton,
   StyledInput,
 } from "./styles"
+import productPlaceholder from "../../static/images/productPlaceholder.jpg"
 
 export default function ShoppingItem({ element, changePrice, changeAmount }) {
   const [quantity, setQuantity] = useState(element.selectedQuantity)
@@ -35,7 +36,7 @@ export default function ShoppingItem({ element, changePrice, changeAmount }) {
 
   return (
     <Card>
-      <ItemImage src="./images/productPlaceholder.jpg" alt="item image" />
+      <ItemImage src={productPlaceholder} alt="item image" />
       <ItemInfoSection>
         <h4>Product: {name}</h4>
         <h4>Price: ${price}</h4>
