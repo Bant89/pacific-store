@@ -1,6 +1,6 @@
 import React from "react"
 import * as Yup from "yup"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import { Formik, Form } from "formik"
 import Field from "../components/Field"
 import { Layout } from "components/Layout"
@@ -18,7 +18,7 @@ const LoginSchema = Yup.object().shape({
 })
 
 export default function Login() {
-  const { login, isLogged, isLoginLoading, hasError } = useUser()
+  const { login, isLoginLoading, hasError } = useUser()
 
   return (
     <Layout>
@@ -35,6 +35,9 @@ export default function Login() {
               validationSchema={LoginSchema}
               onSubmit={(values) => {
                 login(values)
+                if (!isLoginLoading && !hasError) {
+                  navigate("/")
+                }
               }}
             >
               {({ errors, touched }) => (

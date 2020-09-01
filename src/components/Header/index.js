@@ -23,11 +23,11 @@ export const Header = ({ siteTitle }) => {
       if (window.innerWidth > 768) setDisplay(true)
     }
     window.addEventListener("resize", handleResize)
-
+    console.log(`Is Logged ? `, isLogged)
     return function cleanup() {
       window.removeEventListener("resize", handleResize)
     }
-  }, [])
+  }, [isLogged])
 
   return (
     <StyledHeader>
@@ -57,9 +57,7 @@ export const Header = ({ siteTitle }) => {
               {isLogged ? (
                 <StyledLink
                   to="/"
-                  onClick={() => {
-                    logout()
-                  }}
+                  onClick={logout}
                 >
                   Logout
                 </StyledLink>

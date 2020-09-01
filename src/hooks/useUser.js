@@ -17,13 +17,17 @@ export default function useUser() {
     error: null,
   })
 
+  const [isLogged, setIsLogged] = useState(() => Boolean(userId))
+
   const login = useCallback(
     ({ email, password }) => {
       setLoadingState({ loading: true, error: false })
       loginService({ email, password })
-        .then(token => {
+        .then(res => {
+          setToken(res.auth_token)
+          setUserId(res.user?.id)
+          setIsLogged(true)
           setLoadingState({ loading: false, error: false })
-          setToken(token)
         })
         .catch(err => {
           setToken(null)
@@ -31,7 +35,7 @@ export default function useUser() {
           console.error(err)
         })
     },
-    [setToken, setLoadingState]
+    [setToken, setLoadingState, setUserId, setIsLogged]
   )
 
   const createUser = useCallback(
@@ -43,6 +47,7 @@ export default function useUser() {
         const { user } = data
         setUserId(user.id)
         setCreationState({ loading: false, error: null })
+        setIsLogged(true)
         userId = user.id
       } catch (err) {
         setUserId(null)
@@ -70,10 +75,11 @@ export default function useUser() {
   const logout = useCallback(() => {
     setUserId(null)
     setToken(null)
+    setIsLogged(false)
   }, [setUserId, setToken])
 
   return {
-    isLogged: Boolean(userId),
+    isLogged,
     isLoginLoading: loadingState.loading,
     hasError: loadingState.error,
     isCreationLoading: creationState.loading,
