@@ -1,7 +1,7 @@
 import axios from "axios"
-const ENDPOINT = "http://localhost:3000/auth/login"
+const ENDPOINT = "http://localhost:3000/stores"
 
-export function registerStoreService({ name, description, image }) {
+export default function registerStoreService({ name, description, category, userId }) {
     const config = {
         headers: {
             "Content-Type": "application/json",
@@ -11,14 +11,10 @@ export function registerStoreService({ name, description, image }) {
         .post(ENDPOINT, {
             title: name,
             description,
-            image,
-            category
+            category,
+            user_id: userId
         }, config)
         .then(res => {
-            if (res.status !== 200) throw new Error("Response is not ok")
             return res.data
-        })
-        .then(data => {
-            return data.auth_token
         })
 }

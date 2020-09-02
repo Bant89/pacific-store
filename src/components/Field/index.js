@@ -12,6 +12,7 @@ export default function Field({
   component,
   placeholder,
 }) {
+
   return (
     <>
       <StyledLabel htmlFor={name}>{label}</StyledLabel>

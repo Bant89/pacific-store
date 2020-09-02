@@ -84,6 +84,7 @@ export default function useUser() {
     hasError: loadingState.error,
     isCreationLoading: creationState.loading,
     creationHasError: creationState.error,
+    userId,
     login,
     createUser,
     logout

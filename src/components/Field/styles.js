@@ -22,6 +22,10 @@ export const StyledLabel = styled.label`
   margin: 0.5em 0;
 `;
 
+export const StyledTextArea = styled.textarea`
+  resize: none;
+`;
+
 export const ErrorMessage = styled.p`
   color: red;
   margin-bottom: 0.25em;
