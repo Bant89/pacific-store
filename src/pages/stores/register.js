@@ -20,11 +20,10 @@ const RegisterStoreSchema = Yup.object().shape({
 })
 
 export default function StoreRegister() {
-  const { createStore, loading, error, data } = useStore()
+  const { createStore, loading, error, updateImage } = useStore()
   return (
     <Layout>
       <MainFormContainer>
-
         {loading && <strong>Validating data</strong>}
         {error !== null && <strong>Something went wrong</strong>}
         <h1>Crea una cuenta en Pacific Stores</h1>
@@ -38,10 +37,7 @@ export default function StoreRegister() {
           validationSchema={RegisterStoreSchema}
           onSubmit={(values) => {
             createStore(values)
-            console.log('Values')
-            console.log(values)
-            console.log('Data')
-            console.log(data)
+            updateImage(values.image)
           }}
         >
           {({ setFieldValue, errors, touched }) => (

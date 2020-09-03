@@ -1,5 +1,6 @@
 import React from "react"
 import * as Yup from "yup"
+import { navigate } from "gatsby"
 import useStore from "hooks/useStore"
 import { Formik, Form } from "formik"
 import Field, { SelectField, FileUploader } from "components/Field"
@@ -11,32 +12,35 @@ import {
     ActionSection,
 } from "styles/formStyles";
 
-const UpdateStoreSchema = Yup.object().shape({
-    name: Yup.string(),
-    description: Yup.string(),
-    category: Yup.string(),
+const RegisterProductSchema = Yup.object().shape({
+    title: Yup.string().required("Requerido"),
+    price: Yup.number.positive().required("Requerido"),
+    amount: Yup.number.positive().required("Requerido"),
+    description: Yup.string().required("Requerido"),
+    category: Yup.string().required("Requerido"),
     image: Yup.mixed()
 })
 
-export default function StoreUpdate() {
-    const { updateStore, loading, error, updateImage } = useStore()
+export default function StoreRegister() {
+    const { createStore, loading, error, updateImage } = useStore()
     return (
         <Layout>
             <MainFormContainer>
-
                 {loading && <strong>Validando los datos</strong>}
-                {error !== null && <strong>Algo salió mal, intente denuevo</strong>}
-                <h1>Editar tu tienda de Pacific Stores</h1>
+                {error !== null && <strong>Algo salió mal</strong>}
+                <h1>Crea un producto</h1>
                 <Formik
                     initialValues={{
-                        name: "",
+                        title: "",
                         description: "",
                         category: "",
+                        amount: 0,
+                        price: 0,
                         image: ""
                     }}
-                    validationSchema={UpdateStoreSchema}
+                    validationSchema={RegisterProductSchema}
                     onSubmit={(values) => {
-                        updateStore(values)
+                        createStore(values)
                         updateImage(values.image)
                     }}
                 >
@@ -45,10 +49,10 @@ export default function StoreUpdate() {
                             <FormContainer>
                                 <FieldSection>
                                     <Field
-                                        name="name"
+                                        name="title"
                                         label="Nombre"
-                                        errorMessage={errors.name}
-                                        isTouched={touched.name}
+                                        errorMessage={errors.title}
+                                        isTouched={touched.title}
                                     />
                                     <Field
                                         name="description"
@@ -68,10 +72,22 @@ export default function StoreUpdate() {
                                         <option value="Deportiva">Deportiva</option>
                                         <option value="Música">Música</option>
                                     </SelectField>
+                                    <Field
+                                        name="amount"
+                                        label="Cantidad disponible"
+                                        errorMessage={errors.amount}
+                                        isTouched={touched.amount}
+                                    />
+                                    <Field
+                                        name="price"
+                                        label="Precio"
+                                        errorMessage={errors.price}
+                                        isTouched={touched.price}
+                                    />
                                     <FileUploader setValue={setFieldValue} />
                                 </FieldSection>
                                 <ActionSection>
-                                    <button type="submit">Actualizar tienda</button>
+                                    <button type="submit">Crear tienda</button>
                                 </ActionSection>
                             </FormContainer>
                         </Form>
