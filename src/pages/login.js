@@ -34,9 +34,9 @@ export default function Login() {
               }}
               validationSchema={LoginSchema}
               onSubmit={(values) => {
-                console.log(values)
                 login(values)
-
+                if (!isLoginLoading && !hasError)
+                  navigate("/profile")
               }}
             >
               {({ errors, touched }) => (

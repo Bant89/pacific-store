@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Link } from "gatsby"
 import { Layout } from "components/Layout"
 import SEO from "components/seo"
@@ -51,7 +51,13 @@ const TopInfo = styled.div`
 `
 
 export default function Profile() {
-  const { storeId } = useStore()
+  const { store } = useStore()
+
+  useEffect(() => {
+    console.log('Store')
+    console.log(store)
+  }, [store])
+
   return (
     <Layout>
       <SEO title="Profile" />

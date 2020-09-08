@@ -18,9 +18,8 @@ export default function useStore() {
 
     useEffect(() => {
         if (userId) {
-            console.log('User id ', userId)
             getUserStoreService(userId)
-                .then(result => console.log(result))
+                .then(result => setStore(result))
                 .catch(err => console.error(err))
         }
     }, [userId])
@@ -64,6 +63,7 @@ export default function useStore() {
 
     return {
         storeId,
+        store,
         createStore,
         updateStore,
         updateImage,
