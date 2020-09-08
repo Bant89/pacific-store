@@ -1,18 +1,29 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import useUser from "./useUser"
 import useLocalStorage from "./useLocalStorage"
-import registerStoreService from "../services/stores/register"
-import updateStoreService from "../services/stores/update"
-import uploadImageService from "../services/stores/uploadImage"
+import getUserStoreService from "services/users/getStore"
+import registerStoreService from "services/stores/register"
+import updateStoreService from "services/stores/update"
+import uploadImageService from "services/stores/uploadImage"
 
 export default function useStore() {
     const [storeId, setStoreId] = useLocalStorage("store-id", "")
     const { userId } = useUser()
+    const [store, setStore] = useState({})
     const [requestState, setRequestState] = useState({
         loading: false,
         error: null
     })
     const [data, setData] = useState(null)
+
+    useEffect(() => {
+        if (userId) {
+            console.log('User id ', userId)
+            getUserStoreService(userId)
+                .then(result => console.log(result))
+                .catch(err => console.error(err))
+        }
+    }, [userId])
 
     const createStore = ({ name, description, category }) => {
         setRequestState({ loading: true, error: null })

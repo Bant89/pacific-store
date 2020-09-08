@@ -1,23 +1,24 @@
 import { useContext, useEffect, useState, useCallback } from "react"
 import useLocalStorage from "hooks/useLocalStorage"
 import { UserContext } from "context/UserContext"
-import getUser from "services/users/getUser"
-import loginService from "services/login"
-import registerService from "services/register"
-import uploadImageService from "services/uploadImage"
+import getUserService from "services/users/getUser"
+import loginService from "services/users/login"
+import registerService from "services/users/register"
+import uploadImageService from "services/users/uploadImage"
 
 export default function useUser() {
   const { user, setUser } = useContext(UserContext)
   const [userId, setUserId] = useLocalStorage("user-id", "")
   const [token, setToken] = useLocalStorage("auth_token", "")
+  const [isLogged, setIsLogged] = useState(false)
   const [loadingState, setLoadingState] = useState({
     loading: false,
     error: false,
   })
 
   useEffect(() => {
-    if (user?.id) {
-      getUser(user.id)
+    if (!!user?.id) {
+      getUserService(user.id)
         .then(result => {
           if (result)
             setUser(result)
@@ -25,6 +26,10 @@ export default function useUser() {
         .catch(err => console.error(err))
     }
   }, [])
+
+  useEffect(() => {
+    checkIfLogged()
+  }, [user])
 
   const [creationState, setCreationState] = useState({
     loading: false,
@@ -83,13 +88,25 @@ export default function useUser() {
   )
 
   const logout = useCallback(() => {
-    setToken(null)
+    setToken("")
     setUser({})
-    setUserId(null)
+    setUserId("")
   }, [setUser, setToken, setUserId])
 
+  const checkIfLogged = () => {
+    if (typeof user !== Object)
+      setIsLogged(false)
+
+    if (Object.keys(user).length !== 0) {
+      setIsLogged(true)
+      return;
+    }
+
+    setIsLogged(false)
+  }
+
   return {
-    isLogged: Object.keys(user).length !== 0,
+    isLogged: isLogged,
     isLoginLoading: loadingState.loading,
     hasError: loadingState.error,
     isCreationLoading: creationState.loading,

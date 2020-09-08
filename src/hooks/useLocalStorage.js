@@ -9,7 +9,8 @@ export default function useLocalStorage(key, initialValue = "") {
         try {
             let item;
             item = window.localStorage.getItem(key);
-            return item ? JSON.parse(item) : initialValue;
+            let serializedReturnItem = typeof item === Object ? JSON.parse(item) : item
+            return item ? serializedReturnItem : initialValue;
         } catch (error) {
             console.log(error);
             return initialValue;

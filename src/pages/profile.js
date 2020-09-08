@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import { Layout } from "components/Layout"
 import SEO from "components/seo"
+import useStore from "hooks/useStore"
 import styled, { css } from "styled-components"
 
 const Container = styled.div`
@@ -50,6 +51,7 @@ const TopInfo = styled.div`
 `
 
 export default function Profile() {
+  const { storeId } = useStore()
   return (
     <Layout>
       <SEO title="Profile" />
@@ -58,9 +60,9 @@ export default function Profile() {
           <TextElement>Profile</TextElement>
           <img src="./images/productPlaceholder.jpg" alt="profilepic" />
           <TextElement>Name:</TextElement>
-          <TextElement content>John Fisher</TextElement>
+          <TextElement content={true}>John Fisher</TextElement>
           <TextElement>Email:</TextElement>
-          <TextElement content>asdad@gmail.com</TextElement>
+          <TextElement content={true}>asdad@gmail.com</TextElement>
           <button>Change Email</button>
         </TopInfo>
         <Stats>
