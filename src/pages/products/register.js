@@ -1,6 +1,5 @@
 import React from "react"
 import * as Yup from "yup"
-import { navigate } from "gatsby"
 import useStore from "hooks/useStore"
 import { Formik, Form } from "formik"
 import Field, { SelectField, FileUploader } from "components/Field"
@@ -14,8 +13,8 @@ import {
 
 const RegisterProductSchema = Yup.object().shape({
     title: Yup.string().required("Requerido"),
-    price: Yup.number.positive().required("Requerido"),
-    amount: Yup.number.positive().required("Requerido"),
+    price: Yup.number().positive().required("Requerido"),
+    amount: Yup.number().positive().required("Requerido"),
     description: Yup.string().required("Requerido"),
     category: Yup.string().required("Requerido"),
     image: Yup.mixed()

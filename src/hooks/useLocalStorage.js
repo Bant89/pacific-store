@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function useLocalStorage(key, initialValue) {
+export default function useLocalStorage(key, initialValue = "") {
     // Taken from https://usehooks.com/useLocalStorage/
     // State to store our value
     // Pass initial state function to useState so logic is only executed once
@@ -23,7 +23,8 @@ export default function useLocalStorage(key, initialValue) {
             const valueToStore =
                 value instanceof Function ? value(storedValue) : value;
             setStoredValue(valueToStore);
-            window.localStorage.setItem(key, JSON.stringify(valueToStore));
+            let serializedValue = typeof valueToStore === Object ? JSON.stringify(valueToStore) : valueToStore
+            window.localStorage.setItem(key, serializedValue);
         } catch (error) {
             // A more advanced implementation would handle the error case
             console.log(error);

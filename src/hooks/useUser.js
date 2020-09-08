@@ -1,41 +1,54 @@
-import { useCallback, useState } from "react"
+import { useContext, useEffect, useState, useCallback } from "react"
+import useLocalStorage from "hooks/useLocalStorage"
+import { UserContext } from "context/UserContext"
+import getUser from "services/getUser"
 import loginService from "services/login"
 import registerService from "services/register"
 import uploadImageService from "services/uploadImage"
-import useLocalStorage from "hooks/useLocalStorage"
 
 export default function useUser() {
+  const { user, setUser } = useContext(UserContext)
   const [userId, setUserId] = useLocalStorage("user-id", "")
-  const [, setImageUrl] = useLocalStorage("imageUrl", "")
-  const [, setToken] = useLocalStorage("auth_token", "")
+  const [token, setToken] = useLocalStorage("auth_token", "")
   const [loadingState, setLoadingState] = useState({
     loading: false,
     error: false,
   })
+
+  useEffect(() => {
+    if (user?.id) {
+      getUser(user.id)
+        .then(result => {
+          if (result)
+            setUser(result)
+        })
+        .catch(err => console.error(err))
+    }
+  }, [])
+
   const [creationState, setCreationState] = useState({
     loading: false,
     error: null,
   })
-
-  const [isLogged, setIsLogged] = useState(() => Boolean(userId))
 
   const login = useCallback(
     ({ email, password }) => {
       setLoadingState({ loading: true, error: false })
       loginService({ email, password })
         .then(res => {
-          setToken(res.auth_token)
-          setUserId(res.user?.id)
-          setIsLogged(true)
+          if (res) {
+            setToken(res.auth_token)
+            setUserId(res.user?.id)
+            setUser(res.user)
+          }
           setLoadingState({ loading: false, error: false })
         })
         .catch(err => {
-          setToken(null)
           setLoadingState({ loading: false, error: true })
           console.error(err)
         })
     },
-    [setToken, setLoadingState, setUserId, setIsLogged]
+    [setToken, setLoadingState, setUserId, setUser]
   )
 
   const createUser = useCallback(
@@ -46,12 +59,9 @@ export default function useUser() {
         const data = await registerService({ name, email, password })
         const { user } = data
         setUserId(user.id)
+        setUser(user)
         setCreationState({ loading: false, error: null })
-        setIsLogged(true)
-        userId = user.id
       } catch (err) {
-        setUserId(null)
-        setToken(null)
         setCreationState({ loading: false, error: err })
         console.error(err)
       }
@@ -61,7 +71,7 @@ export default function useUser() {
           const result = await uploadImageService(userId, image)
           const { data } = result
           const { image_url } = data
-          setImageUrl(image_url)
+          setUser(curUser => ({ ...curUser, avatar_url: image_url }))
         } catch (err) {
           console.log('Image error')
           console.error(err)
@@ -69,22 +79,24 @@ export default function useUser() {
       }
 
     },
-    [setCreationState, setImageUrl, setUserId, setToken]
+    [setCreationState, setUser, setUserId]
   )
 
   const logout = useCallback(() => {
-    setUserId(null)
     setToken(null)
-    setIsLogged(false)
-  }, [setUserId, setToken])
+    setUser({})
+    setUserId(null)
+  }, [setUser, setToken, setUserId])
 
   return {
-    isLogged,
+    isLogged: Object.keys(user).length !== 0,
     isLoginLoading: loadingState.loading,
     hasError: loadingState.error,
     isCreationLoading: creationState.loading,
     creationHasError: creationState.error,
     userId,
+    user,
+    token,
     login,
     createUser,
     logout

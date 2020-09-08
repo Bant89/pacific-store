@@ -1,6 +1,5 @@
 import React from "react"
 import * as Yup from "yup"
-import { navigate } from "gatsby"
 import useStore from "hooks/useStore"
 import { Formik, Form } from "formik"
 import Field, { SelectField, FileUploader } from "components/Field"

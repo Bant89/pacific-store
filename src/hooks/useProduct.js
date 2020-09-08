@@ -1,25 +1,22 @@
 import { useState } from "react"
-import useUser from "./useUser"
-import useLocalStorage from "./useLocalStorage"
-import registerStoreService from "../services/stores/register"
-import updateStoreService from "../services/stores/update"
-import uploadImageService from "../services/stores/uploadImage"
+import useStore from "./useStore"
+import registerProductService from "../services/products/register"
+import updateProductService from "../services/products/update"
+import uploadImageService from "../services/products/uploadImage"
 
-export default function useStore() {
-    const [storeId, setStoreId] = useLocalStorage("store-id", "")
-    const { userId } = useUser()
+export default function useProduct() {
+    const { storeId } = useStore()
     const [requestState, setRequestState] = useState({
         loading: false,
         error: null
     })
     const [data, setData] = useState(null)
 
-    const createStore = ({ name, description, category }) => {
+    const createProduct = ({ title, description, category, amount, price }) => {
         setRequestState({ loading: true, error: null })
-        registerStoreService({ name, description, category, userId })
+        registerProductService({ title, description, category, amount, price, storeId })
             .then(res => {
                 setData(res)
-                setStoreId(res.id)
                 setRequestState({ loading: false, error: null })
             })
             .catch(err => {
@@ -27,9 +24,9 @@ export default function useStore() {
             })
     }
 
-    const updateStore = ({ name, description, category }) => {
+    const updateProduct = ({ title, description, category, amount, price, productId }) => {
         setRequestState({ loading: true, error: null })
-        updateStoreService({ name, description, category, storeId })
+        updateProductService({ title, description, category, amount, price, storeId, productId })
             .then(res => {
                 setData(res)
                 setRequestState({ loading: false, error: null })
@@ -52,9 +49,8 @@ export default function useStore() {
     }
 
     return {
-        storeId,
-        createStore,
-        updateStore,
+        createProduct,
+        updateProduct,
         updateImage,
         loading: requestState.loading,
         error: requestState.error,

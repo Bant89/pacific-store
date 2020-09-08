@@ -13,4 +13,8 @@ export default function loginService({ email, password }) {
       if (res.status !== 200) throw new Error("Response is not ok")
       return res.data
     })
+    .catch(err => {
+      console.error(err)
+      return err
+    })
 }

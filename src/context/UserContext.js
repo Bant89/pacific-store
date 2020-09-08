@@ -1,17 +1,17 @@
-import React, { useState } from "react"
+import React, { useState, useEffect, createContext } from "react"
+export const UserContext = createContext()
 
-const Context = React.createContext({})
+export function UserProvider({ children }) {
 
-export function UserContextProvider({ children }) {
-  const [token, setToken] = useState(() =>
-    window.sessionStorage.getItem("auth_token")
-  )
-  const [userId, setUserId] = useState(() =>
-    window.sessionStorage.getItem("user-id")
-  )
+  const [user, setUser] = useState(() => ({ id: window.localStorage.getItem("user-id") }))
+
+  const contextValue = {
+    user,
+    setUser
+  }
+
   return (
-    <Context.Provider value={{ token, setToken, userId, setUserId }}>{children}</Context.Provider>
+    <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
   )
 }
 
-export default Context
