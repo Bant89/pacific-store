@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState, useCallback } from "react"
 import useLocalStorage from "hooks/useLocalStorage"
 import { UserContext } from "context/UserContext"
-import getUser from "services/getUser"
+import getUser from "services/users/getUser"
 import loginService from "services/login"
 import registerService from "services/register"
 import uploadImageService from "services/uploadImage"
