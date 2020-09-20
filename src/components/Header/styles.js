@@ -50,13 +50,14 @@ export const HeaderList = styled.ul`
 `
 export const HeaderItem = styled.li`
   list-style: none;
-  padding: 0.35em 1em;
+  padding: 0.7em 1em;
   text-transform: uppercase;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin: 0;
   &:active {
     background-color: red;
   }

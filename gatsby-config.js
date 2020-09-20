@@ -27,15 +27,7 @@ module.exports = {
       options: {
         pathToConfigModule: `src/utils/typography`,
       },
-    },
-    // {
-    //   resolve: 'gatsby-plugin-web-font-loader',
-    //   options: {
-    //     google: {
-    //       families: ['Open Sans', 'Oxygen', 'Ubuntu', 'Roboto']
-    //     }
-    //   }
-    // }
+    }
     // {
     //   resolve: `gatsby-source-pg`,
     //   options: {
