@@ -13,16 +13,17 @@ import { categories } from "utils/constants"
 export default function StoreIndex() {
 
   let stores = [], longCards = []
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 6; i++) {
     stores.push(<ShortStoreCard />)
+  }
+
+  for (let i = 0; i < 3; i++) {
     longCards.push(<LongStoreCard />)
   }
 
   return (
     <Layout>
-      <SEO title="Stores" />
-      <h1>Stores</h1>
-      <Link to="stores/register">Create a new store</Link>
+      <SEO title="Tiendas" />
       <section>
         <GridList name="Categorias" type="store" items={categories.map(cat => <CategoryItem content={cat} />)} />
       </section>

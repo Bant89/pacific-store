@@ -13,7 +13,7 @@ export const ItemsContainer = styled.div`
 
 export const Title = styled.h2`
   margin: 0;
-  color: purple;
+  color: black;
 `
 
 export const MainContainer = styled.div`
@@ -22,7 +22,7 @@ export const MainContainer = styled.div`
 `
 
 export const StyledLink = styled(Link)`
-  color: purple;
+  color: black;
   font-size: 1.2em;
 `
 export const HeadContainer = styled.div`
