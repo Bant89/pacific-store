@@ -12,6 +12,7 @@ export const Container = styled.div`
   flex: 0 0 auto;
   max-width: 250px;
   max-height: 250px;
+  margin-right: 1em;
 `
 export const Image = styled.img`
   width: 100%;

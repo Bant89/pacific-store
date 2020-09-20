@@ -5,7 +5,7 @@ import foodTable from "../../static/images/foodTable.jpg"
 import foodLogo from "../../static/images/foodLogo.png"
 import { Container, Image, LogoImage, StoreRank, StoreName } from "./styles"
 
-export default function CarouselItem() {
+export default function ShortStoreCard() {
   return (
     <Container>
       <Image src={foodTable} alt="Store hero" />
