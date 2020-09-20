@@ -1,6 +1,6 @@
 import React from "react"
 import CarouselItem from "components/CarouselItem"
-import { MainContainer, ItemContainer } from "./styles"
+import { MainContainer, ItemContainer, HeadContainer } from "./styles"
 
 export default function CarouselList({ title }) {
   let ans = []
@@ -10,9 +10,10 @@ export default function CarouselList({ title }) {
   }
   return (
     <MainContainer>
-      <h3>{title}</h3>
+      <HeadContainer>
+        <h3>{title}</h3><a href="/probando">See more</a>
+      </HeadContainer>
       <ItemContainer>{ans}</ItemContainer>
-      <a href="/probando">See more</a>
     </MainContainer>
   )
 }

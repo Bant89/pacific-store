@@ -1,15 +1,17 @@
 import React from "react"
+import { IoIosStar } from "react-icons/io"
 import { Link } from "gatsby"
-import productPlaceholder from "../../static/images/productPlaceholder.jpg"
-import { Container, CategoryName, Image } from "./styles"
+import foodTable from "../../static/images/foodTable.jpg"
+import foodLogo from "../../static/images/foodLogo.png"
+import { Container, Image, LogoImage, StoreRank, StoreName } from "./styles"
 
 export default function CarouselItem() {
   return (
     <Container>
-      <Image src={productPlaceholder} alt="category image" />
-      <Link to="/products/detail">
-        <CategoryName>Category Name</CategoryName>
-      </Link>
+      <Image src={foodTable} alt="Store hero" />
+      <LogoImage src={foodLogo} alt="Store logo" />
+      <StoreRank><IoIosStar color="goldenrod" /> 4.5(500)</StoreRank>
+      <StoreName>Tienda de comida</StoreName>
     </Container>
   )
 }
