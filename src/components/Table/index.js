@@ -1,48 +1,105 @@
 import React from "react"
 import { useTable } from "react-table"
-import { Container } from "./styles"
+import { Container, ProductImage } from "./styles"
+import Button from "components/Button"
+import { IoIosStar } from "react-icons/io"
+import breadProduct from "../../static/images/breadProduct.jpg"
+
 export default function Table() {
     const columns = React.useMemo(
         () => [
             {
-                Header: 'Name',
-                columns: [
-                    {
-                        Header: 'First Name',
-                        accessor: 'firstName',
-                    },
-                    {
-                        Header: 'Last Name',
-                        accessor: 'lastName',
-                    },
-                ],
+                Header: 'Imagen',
+                accessor: 'image',
             },
             {
-                Header: 'Info',
-                columns: [
-                    {
-                        Header: 'Age',
-                        accessor: 'age',
-                    },
-                    {
-                        Header: 'Visits',
-                        accessor: 'visits',
-                    },
-                    {
-                        Header: 'Status',
-                        accessor: 'status',
-                    },
-                    {
-                        Header: 'Profile Progress',
-                        accessor: 'progress',
-                    },
-                ],
+                Header: 'Name',
+                accessor: 'name',
+            },
+            {
+                Header: 'Stock',
+                accessor: 'stock',
+            },
+            {
+                Header: 'Valoración',
+                accessor: 'valoration',
+            },
+            {
+                Header: 'Acciones',
+                accessor: 'actions',
             },
         ],
         []
     )
 
-    const data = React.useMemo(() => makeData(20), [])
+    const data = React.useMemo(() => [{
+        image: <div><ProductImage src={breadProduct} alt="product-name" /></div>,
+        name: "Producto de comida",
+        stock: "13",
+        valoration: <div>
+            <IoIosStar color="goldenrod" size="1rem" />
+            <IoIosStar color="goldenrod" size="1rem" />
+            <IoIosStar color="goldenrod" size="1rem" />
+            <IoIosStar color="goldenrod" size="1rem" />
+            <IoIosStar color="black" size="1rem" />
+        4.0(50)
+        </div>,
+        actions: <div>
+            <Button theme="secondary">Editar</Button>
+            <Button theme="secondary">Desactivar</Button>
+        </div>,
+    },
+    {
+        image: <div><ProductImage src={breadProduct} alt="product-name" /></div>,
+        name: "Producto de comida",
+        stock: "13",
+        valoration: <div>
+            <IoIosStar color="goldenrod" size="1rem" />
+            <IoIosStar color="goldenrod" size="1rem" />
+            <IoIosStar color="goldenrod" size="1rem" />
+            <IoIosStar color="goldenrod" size="1rem" />
+            <IoIosStar color="black" size="1rem" />
+        4.0(50)
+        </div>,
+        actions: <div>
+            <Button theme="secondary">Editar</Button>
+            <Button theme="secondary">Desactivar</Button>
+        </div>,
+    },
+    {
+        image: <div><ProductImage src={breadProduct} alt="product-name" /></div>,
+        name: "Producto de comida",
+        stock: "13",
+        valoration: <div>
+            <IoIosStar color="goldenrod" size="1rem" />
+            <IoIosStar color="goldenrod" size="1rem" />
+            <IoIosStar color="goldenrod" size="1rem" />
+            <IoIosStar color="goldenrod" size="1rem" />
+            <IoIosStar color="black" size="1rem" />
+        4.0(50)
+        </div>,
+        actions: <div>
+            <Button theme="secondary">Editar</Button>
+            <Button theme="secondary">Desactivar</Button>
+        </div>,
+    },
+    {
+        image: <div><ProductImage src={breadProduct} alt="product-name" /></div>,
+        name: "Producto de comida",
+        stock: "13",
+        valoration: <div>
+            <IoIosStar color="goldenrod" size="1rem" />
+            <IoIosStar color="goldenrod" size="1rem" />
+            <IoIosStar color="goldenrod" size="1rem" />
+            <IoIosStar color="goldenrod" size="1rem" />
+            <IoIosStar color="black" size="1rem" />
+        4.0(50)
+        </div>,
+        actions: <div>
+            <Button theme="secondary">Editar</Button>
+            <Button theme="secondary">Desactivar</Button>
+        </div>,
+    }], [])
 
     const {
         getTableProps, getTableBodyProps, headerGroups, rows, prepareRow

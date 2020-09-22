@@ -1,12 +1,12 @@
 import React from "react"
 import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa"
 import { SiGmail } from "react-icons/si"
-
+import Table from "components/Table"
 import Tag from "components/Tag"
 import Button from "components/Button"
 import storePlaceholder from "../../static/images/storePlaceholder.jpg"
 import foodLogo from "../../static/images/foodLogo.png"
-import { Container, MainImage, LeftSection, RightSection, Table, LogoImage, StyledInput, SocialContainer, SocialItem } from "./styles"
+import { Container, MainImage, LeftSection, RightSection, TableContainer, LogoImage, StyledInput, SocialContainer, SocialItem } from "./styles"
 
 export default function StoreViewer() {
 
@@ -41,10 +41,14 @@ export default function StoreViewer() {
                     </SocialContainer>
                 </div>
             </RightSection>
-            <Table>
-                <h2>Productos</h2>
-                <Button type="primary" style={{ marginLeft: "50%" }}>Agregar productos</Button>
-            </Table>
+            <TableContainer>
+                <div>
+                    <h2>Productos</h2>
+                    <Button type="primary" style={{ marginLeft: "50%" }}>Agregar productos</Button>
+                </div>
+                <Table />
+
+            </TableContainer>
         </Container>
     )
 }

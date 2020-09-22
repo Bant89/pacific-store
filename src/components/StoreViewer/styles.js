@@ -38,8 +38,15 @@ export const RightSection = styled.section`
 `;
 
 
-export const Table = styled.section`
+export const TableContainer = styled.section`
     grid-area: table;
+    place-self: start stretch;
+    & > div {
+        display: flex;
+        justify-content: space-around;
+    }
+
+
 `;
 
 export const LogoImage = styled.img`
