@@ -16,7 +16,6 @@ export const Container = styled.div`
     justify-items: center;
     h2 {
         color: ${COLORS.background.primary};
-        display: inline;
     }
 `;
 
@@ -47,4 +46,29 @@ export const LogoImage = styled.img`
     border-radius: 50%;
     width: 150px; 
     height: 150px;
+    margin: 0 auto;
+    display: block;
+`;
+
+export const StyledInput = styled.input`
+    border: none;
+    border-bottom: 2px solid #333;
+    outline: none;
+    width: 85%;
+    &:active {
+        border: none;
+        border-bottom: 2px solid #333;
+    }
+`;
+
+export const SocialContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`;
+
+export const SocialItem = styled.p`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
 `;
