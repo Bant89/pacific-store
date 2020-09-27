@@ -2,6 +2,18 @@ import { Link } from "gatsby"
 import styled from 'styled-components'
 import { COLORS } from 'utils/constants'
 
+export const Wrapper = styled.div`
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,.5);
+`;
+
 export const Container = styled.div`
     display: grid;
     grid-template-areas:
@@ -11,11 +23,13 @@ export const Container = styled.div`
     ". content content"
     ". content content";
     padding: 0.5em;
-    width: 30vw;
-    min-width: 300px;
-    margin: 0 auto;
-    height: 70vh;
-    background-color: white;
+    width: 100%;
+    height: ;
+    background-color: #f6f6f6;
+    
+    @media(min-width: 768px) {
+        width: 450px;
+    }
 `;
 
 export const CloseButton = styled.button`
@@ -43,6 +57,10 @@ export const ContentContainer = styled.div`
         font-size: 1.2rem;
         font-weight: bold;
     }
+
+    & > button {
+        margin-bottom: 1em;
+    }
 `;
 
 export const StyledLink = styled(Link)`
@@ -59,11 +77,12 @@ export const FormItem = styled.div`
     display: flex;
     flex-direction: column;
     justify-items: start;    
-    
     font-weigth: bold;
-   label {
-       margin-bottom: 5px;
-   }
+    margin-bottom: 1em;
+    max-width: 250px;
+    label {
+        margin-bottom: 5px;
+    }
     input {
         border: 1px solid ${COLORS.background.primary};
         border-radius: 15px;

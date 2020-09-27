@@ -1,9 +1,10 @@
-import React from "react"
+import React, { useState } from "react"
 import * as Yup from "yup"
 import { Link, navigate } from "gatsby"
 import { Formik, Form } from "formik"
 import Field from "../components/Field"
 import { Layout } from "components/Layout"
+import ModalPortal from "components/Modals/ModalPortal"
 import useUser from "hooks/useUser"
 import {
   MainFormContainer,
@@ -19,62 +20,70 @@ const LoginSchema = Yup.object().shape({
 
 export default function Login() {
   const { login, isLoginLoading, hasError } = useUser()
+  const [modal, setModal] = useState(true)
 
   return (
     <Layout>
-      {isLoginLoading ? (
-        <strong>Checking credentials </strong>
-      ) : (
-          <MainFormContainer>
-            <h1>Crea una cuenta en Pacific Stores</h1>
-            <Formik
-              initialValues={{
-                email: "",
-                password: ""
-              }}
-              validationSchema={LoginSchema}
-              onSubmit={(values) => {
-                login(values)
-                if (!isLoginLoading && !hasError)
-                  navigate("/profile")
-              }}
-            >
-              {({ errors, touched }) => (
-                <Form>
-                  <FormContainer>
-                    <FieldSection>
-                      <Field
-                        type="email"
-                        name="email"
-                        label="Correo electrónico"
-                        errorMessage={errors.email}
-                        isTouched={touched.email}
-                      />
-
-                      <Field
-                        type="password"
-                        name="password"
-                        label="Contraseña"
-                        errorMessage={errors.password}
-                        isTouched={touched.password}
-                      />
-                    </FieldSection>
-                    <ActionSection>
-                      <button type="submit">Login</button>
-                    </ActionSection>
-                  </FormContainer>
-                </Form>
-              )}
-            </Formik>
-            <p>
-              Don't have an account?
-            </p>
-            <Link to="/register">
-              Register
-              </Link>
-          </MainFormContainer>
-        )}
-      {hasError && <h3>Something went wrong</h3>}
+      {modal && <ModalPortal onClose={() => setModal(false)} />}
+      <button onClick={() => { setModal(true) }}>Open Modal</button>
     </Layout>
   )
+
+  // return (
+  //   <Layout>
+  //     {isLoginLoading ? (
+  //       <strong>Checking credentials </strong>
+  //     ) : (
+  //         <MainFormContainer>
+  //           <h1>Crea una cuenta en Pacific Stores</h1>
+  //           <Formik
+  //             initialValues={{
+  //               email: "",
+  //               password: ""
+  //             }}
+  //             validationSchema={LoginSchema}
+  //             onSubmit={(values) => {
+  //               login(values)
+  //               if (!isLoginLoading && !hasError)
+  //                 navigate("/profile")
+  //             }}
+  //           >
+  //             {({ errors, touched }) => (
+  //               <Form>
+  //                 <FormContainer>
+  //                   <FieldSection>
+  //                     <Field
+  //                       type="email"
+  //                       name="email"
+  //                       label="Correo electrónico"
+  //                       errorMessage={errors.email}
+  //                       isTouched={touched.email}
+  //                     />
+
+  //                     <Field
+  //                       type="password"
+  //                       name="password"
+  //                       label="Contraseña"
+  //                       errorMessage={errors.password}
+  //                       isTouched={touched.password}
+  //                     />
+  //                   </FieldSection>
+  //                   <ActionSection>
+  //                     <button type="submit">Login</button>
+  //                   </ActionSection>
+  //                 </FormContainer>
+  //               </Form>
+  //             )}
+  //           </Formik>
+  //           <p>
+  //             Don't have an account?
+  //           </p>
+  //           <Link to="/register">
+  //             Register
+  //             </Link>
+  //         </MainFormContainer>
+  //       )}
+  //     {hasError && <h3>Something went wrong</h3>}
+  //   </Layout>
+  // )
 }

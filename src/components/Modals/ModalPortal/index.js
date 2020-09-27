@@ -2,38 +2,29 @@ import React, { useEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom"
 import { AiOutlineCloseCircle } from "react-icons/ai"
 import Button from "components/Button"
-import Field from "components/Field"
-import { Container, ContentContainer, StyledLink, CloseButton, FormItem } from "styles/modalStyles"
+import { Wrapper, Container, ContentContainer, StyledLink, CloseButton, FormItem } from "./styles"
 
-
-export function LogIn({ children, onClose }) {
+function ForgotPassword({ onClose }) {
     return (
-        <Container>
-            <CloseButton onClick={() => {
-                console.log('Hice click')
-                onClose()
-            }}><AiOutlineCloseCircle color="#B26FF5" size="3rem" /></CloseButton>
-            <ContentContainer>
-                <Button>Continua con Facebook</Button>
-                <Button>Continua con Google</Button>
-                <span>ó</span>
-                <FormItem>
-                    <label>Correo electrónico</label>
-                    <input type="text" placeholder="john@acme.com" />
-                </FormItem>
-                <FormItem>
-                    <label>Contraseña</label>
-                    <input type="password" placeholder="******" />
-                </FormItem>
-                <Button>Iniciar sesión</Button>
-                <StyledLink>¿Olvidaste tu contraseña?</StyledLink>
-                <StyledLink>¿No tienes cuenta? Crea una</StyledLink>
-            </ContentContainer>
-        </Container>
+        <Wrapper>
+            <Container>
+                <CloseButton onClick={() => {
+                    onClose()
+                }}><AiOutlineCloseCircle color="#B26FF5" size="3rem" /></CloseButton>
+                <ContentContainer>
+                    <FormItem>
+                        <label>Entra tu correo para reiniciar tu contraseña</label>
+                        <input type="text" placeholder="john@acme.com" />
+                    </FormItem>
+                    <Button>Reiniciar contraseña</Button>
+                    <Button theme="classic">Cancelar</Button>
+                </ContentContainer>
+            </Container>
+        </Wrapper>
     )
 }
 
-export default function ModalPortal({ children, onClose }) {
+export default function ModalPortal({ onClose }) {
     const ref = useRef(null)
     const [mounted, setMounted] = useState(false)
 
@@ -42,6 +33,6 @@ export default function ModalPortal({ children, onClose }) {
         setMounted(true)
     })
 
-    return mounted ? createPortal(<LogIn onClose={onClose}>{children}</LogIn>, ref.current) : null
+    return mounted ? createPortal(<ForgotPassword onClose={onClose} />, ref.current) : null
 
 }
