@@ -4,9 +4,17 @@ import { Link } from "gatsby"
 export const H1 = styled.h1`
   color: yellow;
   display: inline-block;
-  font-size: 1.4em;
+  font-size: 1.4rem;
   margin: auto 0;
 `
+
+export const HiddenContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+`;
 
 export const IconButton = styled.button`
   background: transparent;
@@ -18,11 +26,11 @@ export const IconButton = styled.button`
 `
 export const StyledHeader = styled.header`
   background: rebeccapurple;
-  marginbottom: 1.45rem;
+  font-family: Roboto;
 `
 export const Container = styled.div`
-  margin: 0 auto;
-  maxwidth: 960;
+  margin: 0 auto 0 auto;
+  max-width: 960;
   color: #fff;
   font-weight: bold;
   font-size: 1.1em;
@@ -32,40 +40,25 @@ export const HeaderList = styled.ul`
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
-
+  max-width: 1080px;
   @media (min-width: 768px) {
     flex-direction: row;
   }
 `
-
-export const HiddenContainer = styled.div`
-  display: ${props => props.display};
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  @media (min-width: 768px) {
-    flex-direction: row;
-  }
-`
-
 export const HeaderItem = styled.li`
   list-style: none;
-  padding: 0.35em 1em;
+  padding: 0.7em 1em;
   text-transform: uppercase;
-  font-family: "Segoe UI", Roboto;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  margin: 0;
   &:active {
     background-color: red;
-  }
-
-  &:first-child {
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   &:hover {

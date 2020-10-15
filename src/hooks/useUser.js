@@ -1,14 +1,36 @@
-import { useCallback, useContext, useState } from "react"
-import Context from "context/UserContext"
-import loginService from "services/login"
-import registerService from "services/register"
+import { useContext, useEffect, useState, useCallback } from "react"
+import useLocalStorage from "hooks/useLocalStorage"
+import { UserContext } from "context/UserContext"
+import getUserService from "services/users/getUser"
+import loginService from "services/users/login"
+import registerService from "services/users/register"
+import uploadImageService from "services/users/uploadImage"
 
 export default function useUser() {
-  const { token, setToken } = useContext(Context)
+  const { user, setUser } = useContext(UserContext)
+  const [userId, setUserId] = useLocalStorage("user-id", "")
+  const [token, setToken] = useLocalStorage("auth_token", "")
+  const [isLogged, setIsLogged] = useState(false)
   const [loadingState, setLoadingState] = useState({
     loading: false,
     error: false,
   })
+
+  useEffect(() => {
+    if (!!user?.id) {
+      getUserService(user.id)
+        .then(result => {
+          if (result)
+            setUser(result)
+        })
+        .catch(err => console.error(err))
+    }
+  }, [])
+
+  useEffect(() => {
+    checkIfLogged()
+  }, [user])
+
   const [creationState, setCreationState] = useState({
     loading: false,
     error: null,
@@ -18,51 +40,82 @@ export default function useUser() {
     ({ email, password }) => {
       setLoadingState({ loading: true, error: false })
       loginService({ email, password })
-        .then(token => {
-          window.sessionStorage.setItem("auth_token", token)
+        .then(res => {
+          if (res) {
+            setToken(res.auth_token)
+            setUserId(res.user?.id)
+            setUser(res.user)
+          }
           setLoadingState({ loading: false, error: false })
-          setToken(token)
         })
         .catch(err => {
-          window.sessionStorage.removeItem("auth_token")
           setLoadingState({ loading: false, error: true })
           console.error(err)
         })
     },
-    [setToken, setLoadingState]
+    [setToken, setLoadingState, setUserId, setUser]
   )
 
   const createUser = useCallback(
-    ({ name, password, email }) => {
+    async ({ name, email, password, image }) => {
       setCreationState({ loading: true, error: null })
-      registerService({ name, password, email })
-        .then(data => {
-          window.sessionStorage.setItem("auth_token", data.auth_token)
-          setCreationState({ loading: false, error: null })
-          setToken(token)
-        })
-        .catch(err => {
-          window.sessionStorage.removeItem("auth_token")
-          setCreationState({ loading: false, error: err })
+      let userId = null
+      try {
+        const data = await registerService({ name, email, password })
+        const { user } = data
+        setUserId(user.id)
+        setUser(user)
+        setCreationState({ loading: false, error: null })
+      } catch (err) {
+        setCreationState({ loading: false, error: err })
+        console.error(err)
+      }
+
+      if (userId !== null) {
+        try {
+          const result = await uploadImageService(userId, image)
+          const { data } = result
+          const { image_url } = data
+          setUser(curUser => ({ ...curUser, avatar_url: image_url }))
+        } catch (err) {
+          console.log('Image error')
           console.error(err)
-        })
+        }
+      }
+
     },
-    [setToken, setCreationState]
+    [setCreationState, setUser, setUserId]
   )
 
   const logout = useCallback(() => {
-    window.sessionStorage.removeItem("auth_token")
-    setToken(null)
-  }, [setToken])
+    setToken("")
+    setUser({})
+    setUserId("")
+  }, [setUser, setToken, setUserId])
+
+  const checkIfLogged = () => {
+    if (typeof user !== Object)
+      setIsLogged(false)
+
+    if (Object.keys(user).length !== 0) {
+      setIsLogged(true)
+      return;
+    }
+
+    setIsLogged(false)
+  }
 
   return {
-    isLogged: Boolean(token),
+    isLogged: isLogged,
     isLoginLoading: loadingState.loading,
     hasError: loadingState.error,
     isCreationLoading: creationState.loading,
     creationHasError: creationState.error,
+    userId: user?.id,
+    user,
+    token,
     login,
     createUser,
-    logout,
+    logout
   }
 }

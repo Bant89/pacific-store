@@ -1,25 +1,32 @@
-import styled from "styled-components"
+import styled from "styled-components";
+import { Field } from "formik";
 
-export const NormalInput = styled.input`
-  background: transparent;
-  margin-bottom: 0.5em;
-  border: 0;
-  outline: 0;
-  border-bottom: 1px solid black;
-  max-width: 315px;
-`
+export const StyledField = styled(Field)`
+  border: 1px solid #333;
+  border-radius: 0.25em;
+  margin-bottom: 1em;
+  resize: none;
+  line-height: 1.5em;
+  width: 90%;
+  text-align: left;
+  padding: 0.5em;
+  @media (max-width: 768px) {
+    width: auto;
+  }
+`;
 
-export const Label = styled.label`
-  text-transform: uppercase;
-  color: #a590ad;
-  display: block;
-  max-width: 305px;
-`
+export const StyledLabel = styled.label`
+  font-weight: bolder;
+  font-size: 1.25em;
+  text-align: left;
+  margin: 0.5em 0;
+`;
+
+export const StyledTextArea = styled.textarea`
+  resize: none;
+`;
 
 export const ErrorMessage = styled.p`
-  display: block;
   color: red;
-  text-shadow: 1px 1px #333333;
-  margin-bottom: 0;
-  max-width: 305px;
-`
+  margin-bottom: 0.25em;
+`;

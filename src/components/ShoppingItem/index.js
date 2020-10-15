@@ -7,25 +7,36 @@ import {
   QuantityButton,
   StyledInput,
 } from "./styles"
+import productPlaceholder from "../../static/images/productPlaceholder.jpg"
 
 export default function ShoppingItem({ element, changePrice, changeAmount }) {
-  const [quantity, setQuantity] = useState(1)
+  const [quantity, setQuantity] = useState(element.selectedQuantity)
   const { name, price } = element
   const increment = () => {
+    if (quantity + 1 > element.quantity) {
+      alert("Cant order more items, out of stock")
+      return
+    }
     setQuantity(state => state + 1)
     changePrice(currentPrice => currentPrice + price)
     changeAmount(state => state + 1)
+    element.selectedQuantity++
   }
 
   const decrement = () => {
+    if (quantity - 1 === 0) {
+      alert("Cant order negative items")
+      return
+    }
     setQuantity(state => state - 1)
     changePrice(currentPrice => currentPrice - price)
     changeAmount(state => state - 1)
+    element.selectedQuantity--
   }
 
   return (
     <Card>
-      <ItemImage src="https://loremflickr.com/150/150" alt="item image" />
+      <ItemImage src={productPlaceholder} alt="item image" />
       <ItemInfoSection>
         <h4>Product: {name}</h4>
         <h4>Price: ${price}</h4>

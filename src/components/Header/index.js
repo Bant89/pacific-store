@@ -8,20 +8,25 @@ import {
   StyledLink,
   StyledHeader,
   Container,
+  HiddenContainer,
   HeaderList,
   HeaderItem,
-  IconButton,
-  HiddenContainer,
+  IconButton
 } from "./styles"
 
 export const Header = ({ siteTitle }) => {
-  const [display, setDisplay] = useState(false)
+  const [display, setDisplay] = useState(true)
   const { isLogged, logout } = useUser()
 
   useEffect(() => {
-    const mediaQueryList = window.matchMedia("(min-width: 768px)")
-    if (mediaQueryList.matches) setDisplay(true)
-    console.log("IS LOGGED ", isLogged)
+    const handleResize = () => {
+      if (window.innerWidth > 768) setDisplay(true)
+    }
+    window.addEventListener("resize", handleResize)
+    console.log(`Is Logged ? `, isLogged)
+    return function cleanup() {
+      window.removeEventListener("resize", handleResize)
+    }
   }, [isLogged])
 
   return (
@@ -40,7 +45,10 @@ export const Header = ({ siteTitle }) => {
               <IoMdMenu size="36px" />
             </IconButton>
           </HeaderItem>
-          <HiddenContainer display={display ? "flex" : "none"}>
+          {display && <HiddenContainer>
+            <HeaderItem>
+              <StyledLink to="/stores">Stores</StyledLink>
+            </HeaderItem>
             <HeaderItem>
               <StyledLink to="/products">Products</StyledLink>
             </HeaderItem>
@@ -49,20 +57,18 @@ export const Header = ({ siteTitle }) => {
               {isLogged ? (
                 <StyledLink
                   to="/"
-                  onClick={() => {
-                    logout()
-                  }}
+                  onClick={logout}
                 >
                   Logout
                 </StyledLink>
               ) : (
-                <StyledLink to="/login">Login</StyledLink>
-              )}
+                  <StyledLink to="/login">Login</StyledLink>
+                )}
             </HeaderItem>
             <HeaderItem>
-              <StyledLink to="/shoppingCart">Shopping Cart</StyledLink>
+              <StyledLink to="/shoppingCart">Cart</StyledLink>
             </HeaderItem>
-          </HiddenContainer>
+          </HiddenContainer>}
         </HeaderList>
       </Container>
     </StyledHeader>

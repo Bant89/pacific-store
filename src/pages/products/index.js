@@ -4,7 +4,7 @@ import SEO from "components/seo"
 import GridList from "components/GridList"
 import CarouselList from "components/CarouselList"
 
-export default function Products() {
+export default function ProductIndex() {
   return (
     <Layout>
       <SEO title="Products" />

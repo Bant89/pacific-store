@@ -1,18 +1,13 @@
 import React from "react"
-import CarouselItem from "components/CarouselItem"
-import { MainContainer, ItemContainer } from "./styles"
+import { MainContainer, ItemContainer, HeadContainer } from "./styles"
 
-export default function CarouselList({ title }) {
-  let ans = []
-
-  for (let i = 0; i < 3; i++) {
-    ans.push(<CarouselItem />)
-  }
+export default function CarouselList({ title, items = [] }) {
   return (
     <MainContainer>
-      <h3>{title}</h3>
-      <ItemContainer>{ans}</ItemContainer>
-      <a href="#">See more</a>
+      <HeadContainer>
+        <h3>{title}</h3><a href="/probando">See more</a>
+      </HeadContainer>
+      <ItemContainer>{items}</ItemContainer>
     </MainContainer>
   )
 }

@@ -10,7 +10,7 @@ export const ReviewContainer = styled.div`
 `
 
 export const ReviewImage = styled.img`
-  width: 50px;
+  width: 75px;
   border-radius: 50%;
   display: inline-block;
 `

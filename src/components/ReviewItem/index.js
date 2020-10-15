@@ -8,12 +8,14 @@ import {
   ReviewerName,
   ReviewProfile,
 } from "./styles"
+import avatarPlaceholder from "../../static/images/avatarPlaceholder.jpg"
+
 export default function ReviewItem() {
   return (
     <ReviewContainer>
       <ReviewProfile>
         <ReviewImage
-          src="https://loremflickr.com/50/50"
+          src={avatarPlaceholder}
           alt="placeholderImage"
         />
         <ReviewerName>Name</ReviewerName>

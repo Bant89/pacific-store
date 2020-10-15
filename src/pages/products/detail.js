@@ -12,6 +12,7 @@ import {
   ProductDetailInfo,
   ProductDetailButton,
 } from "styles/productDetail"
+import productPlaceholder from "../../static/images/productPlaceholder.jpg"
 
 export default function ProductDetail() {
   const { addItem } = useShoppingCart()
@@ -20,9 +21,9 @@ export default function ProductDetail() {
       name: "Amazing item",
       quantity: 5,
       price: 55.4,
+      selectedQuantity: 1,
       id: Math.random() * (100 - 1) + 1,
     }
-    console.log("aqui")
     addItem(element)
   }
   return (
@@ -31,7 +32,7 @@ export default function ProductDetail() {
         <ProductDetailMultimedia>
           <h1>Product Detail</h1>
           <ProductDetailImage
-            src="https://loremflickr.com/400/400"
+            src={productPlaceholder}
             alt="product placeholder image"
           />
           <ProductDetailButton onClick={handleAddButton}>

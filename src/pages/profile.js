@@ -1,7 +1,8 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Link } from "gatsby"
 import { Layout } from "components/Layout"
 import SEO from "components/seo"
+import useStore from "hooks/useStore"
 import styled, { css } from "styled-components"
 
 const Container = styled.div`
@@ -50,17 +51,24 @@ const TopInfo = styled.div`
 `
 
 export default function Profile() {
+  const { store } = useStore()
+
+  useEffect(() => {
+    console.log('Store')
+    console.log(store)
+  }, [store])
+
   return (
     <Layout>
       <SEO title="Profile" />
       <Container>
         <TopInfo>
           <TextElement>Profile</TextElement>
-          <img src="https://loremflickr.com/250/150" alt="profilepic" />
+          <img src="./images/productPlaceholder.jpg" alt="profilepic" />
           <TextElement>Name:</TextElement>
-          <TextElement content>John Fisher</TextElement>
+          <TextElement content={true}>John Fisher</TextElement>
           <TextElement>Email:</TextElement>
-          <TextElement content>asdad@gmail.com</TextElement>
+          <TextElement content={true}>asdad@gmail.com</TextElement>
           <button>Change Email</button>
         </TopInfo>
         <Stats>
