@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
     background-color: rgba(0,0,0,.5);
 `;
 
-export const Container = styled.div`
+export const ModalContainer = styled.div`
     display: grid;
     grid-template-areas:
     "x . ."
@@ -24,7 +24,6 @@ export const Container = styled.div`
     ". content content";
     padding: 0.5em;
     width: 100%;
-    height: ;
     background-color: #f6f6f6;
     
     @media(min-width: 768px) {
@@ -42,7 +41,7 @@ export const CloseButton = styled.button`
     background-color: transparent;
 `;
 
-export const ContentContainer = styled.div`
+export const ModalContentContainer = styled.div`
     grid-area: content;
     justify-self: start;
     display: flex;
@@ -50,7 +49,7 @@ export const ContentContainer = styled.div`
     justify-content: space-around;
     align-items: center;
     height: 100%;
-    padding-top: 1em;
+    padding: 1em;
 
     span {
         color: ${COLORS.background.primary};
@@ -66,14 +65,14 @@ export const ContentContainer = styled.div`
 export const StyledLink = styled(Link)`
     color: ${COLORS.background.primary};
     text-decoration: none;
-
+    text-align: center;
     &:hover {
         text-decoration: underline;
         transform: translateY(-5px);
     }
 `;
 
-export const FormItem = styled.div`
+export const ModalFormItem = styled.div`
     display: flex;
     flex-direction: column;
     justify-items: start;    

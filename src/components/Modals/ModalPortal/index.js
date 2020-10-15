@@ -2,24 +2,24 @@ import React, { useEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom"
 import { AiOutlineCloseCircle } from "react-icons/ai"
 import Button from "components/Button"
-import { Wrapper, Container, ContentContainer, StyledLink, CloseButton, FormItem } from "./styles"
+import { Wrapper, ModalContainer, ModalContentContainer, StyledLink, CloseButton, ModalFormItem } from "styles/modalStyles"
 
 function ForgotPassword({ onClose }) {
     return (
         <Wrapper>
-            <Container>
+            <ModalContainer>
                 <CloseButton onClick={() => {
                     onClose()
                 }}><AiOutlineCloseCircle color="#B26FF5" size="3rem" /></CloseButton>
-                <ContentContainer>
-                    <FormItem>
+                <ModalContentContainer>
+                    <ModalFormItem>
                         <label>Entra tu correo para reiniciar tu contraseña</label>
                         <input type="text" placeholder="john@acme.com" />
-                    </FormItem>
+                    </ModalFormItem>
                     <Button>Reiniciar contraseña</Button>
                     <Button theme="classic">Cancelar</Button>
-                </ContentContainer>
-            </Container>
+                </ModalContentContainer>
+            </ModalContainer>
         </Wrapper>
     )
 }
