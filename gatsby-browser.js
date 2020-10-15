@@ -9,6 +9,10 @@ import { ShoppingContextProvider } from "context/ShoppingContext"
 
 // You can delete this file if you're not using it
 
+const portal = document.createElement("div")
+portal.id = "modal-root"
+document.body.appendChild(portal)
+
 export function wrapRootElement({ element }) {
   return (
     <UserProvider>

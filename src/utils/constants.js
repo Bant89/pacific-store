@@ -12,3 +12,5 @@ export const COLORS = {
         primary: "rgba(255,255,255,1)"
     }
 }
+
+export const categories = ['Comida', 'Ropa', 'Accesorios', 'Hogar', 'Tecnología', 'Música', 'Salud', 'Deporte']

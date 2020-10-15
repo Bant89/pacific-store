@@ -26,11 +26,10 @@ export const IconButton = styled.button`
 `
 export const StyledHeader = styled.header`
   background: rebeccapurple;
-  margin-bottom: 1.45rem;
   font-family: Roboto;
 `
 export const Container = styled.div`
-  margin: 0 auto 1em auto;
+  margin: 0 auto 0 auto;
   max-width: 960;
   color: #fff;
   font-weight: bold;
